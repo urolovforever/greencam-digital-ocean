@@ -32,11 +32,11 @@ NGINX
 cp nginx/nginx.conf nginx/nginx.conf.bak
 cp /tmp/nginx-temp.conf nginx/nginx.conf
 
-docker compose up -d nginx
+docker-compose up -d nginx
 
 echo "==> Step 2: Requesting certificate from Let's Encrypt..."
 
-docker compose run --rm certbot certonly \
+docker-compose run --rm certbot certonly \
     --webroot \
     --webroot-path=/var/www/certbot \
     --email "$EMAIL" \
@@ -53,8 +53,8 @@ rm nginx/nginx.conf.bak
 
 echo "==> Step 4: Restarting all services..."
 
-docker compose down
-docker compose up -d
+docker-compose down
+docker-compose up -d
 
 echo ""
 echo "Done! Your site should now be available at https://$DOMAIN"
