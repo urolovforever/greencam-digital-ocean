@@ -36,14 +36,7 @@ docker-compose up -d nginx
 
 echo "==> Step 2: Requesting certificate from Let's Encrypt..."
 
-docker-compose run --rm certbot certonly \
-    --webroot \
-    --webroot-path=/var/www/certbot \
-    --email "$EMAIL" \
-    --agree-tos \
-    --no-eff-email \
-    -d "$DOMAIN" \
-    -d "www.$DOMAIN"
+docker-compose run --rm --entrypoint "certbot certonly --webroot --webroot-path=/var/www/certbot --email $EMAIL --agree-tos --no-eff-email -d $DOMAIN -d www.$DOMAIN" certbot
 
 echo "==> Step 3: Restoring full SSL nginx config..."
 
