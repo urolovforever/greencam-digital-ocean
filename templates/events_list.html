@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Events - Green Campus Initiative{% endblock %}
+
+{% block content %}
+<!-- Events Section -->
+<section class="events-section" id="events" style="padding-top: 140px;">
+    <div class="section-content">
+        <div class="events-header">
+            <div>
+                <span class="section-tag">Event Calendar</span>
+                <h2 class="section-title">Upcoming Events</h2>
+            </div>
+        </div>
+        <div class="events-grid">
+            {% for event in events %}
+            <div class="event-card">
+                <div class="event-date">
+                    <svg class="icon icon-mb" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                        <line x1="16" x2="16" y1="2" y2="6"/>
+                        <line x1="8" x2="8" y1="2" y2="6"/>
+                        <line x1="3" x2="21" y1="10" y2="10"/>
+                    </svg>
+                    <span class="event-day">{{ event.date|date:"d" }}</span>
+                    <span class="event-month">{{ event.date|date:"M" }}</span>
+                </div>
+                <div class="event-info">
+                    <h4 class="event-title">{{ event.name }}</h4>
+                    <p class="event-location">
+                        <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        {{ event.location }}
+                    </p>
+                </div>
+                <a href="{% url 'events:detail' event.id %}" class="event-btn">
+                    Register
+                    <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"/>
+                        <path d="m12 5 7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+            {% empty %}
+            <div class="empty-state">
+                <p class="empty-state-text">No events scheduled at the moment.</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% include 'includes/pagination.html' with page_obj=events %}
+    </div>
+</section>
+{% endblock %}

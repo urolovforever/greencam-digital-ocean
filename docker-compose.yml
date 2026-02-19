@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-greencam}
+      - POSTGRES_USER=${POSTGRES_USER:-greencam}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-password}
+    restart: unless-stopped
+
+  web:
+    build: .
+    volumes:
+      - static_files:/app/staticfiles
+      - media_files:/app/media
+    env_file:
+      - .env
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - static_files:/app/staticfiles
+      - media_files:/app/media
+    depends_on:
+      - web
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  static_files:
+  media_files:

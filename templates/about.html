@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About - GreenCamUz{% endblock %}
+
+{% block content %}
+<!-- About Section -->
+<section class="about-section" id="about" style="padding-top: 140px;">
+    <div class="section-content">
+        <div class="about-grid">
+            <div class="about-text">
+                <span class="section-tag">About GreenCamUz</span>
+                <h2 class="section-title">Green Campus Initiative: Integrating Sustainability into Higher Education in Uzbekistan</h2>
+
+                <p class="about-paragraph"><strong>GreenCamUz</strong> is an international project developed by partner higher education institutions from Uzbekistan, Europe, and Türkiye. The project is funded by a <strong>€359,000 European Union grant</strong> under the Erasmus+ Capacity Building in Higher Education (CBHE) Strand 1 framework.</p>
+
+                <p class="about-paragraph">GreenCamUz is the <strong>only project in Uzbekistan</strong> funded under the CBHE Strand 1 category. It is implemented in line with the United Nations Sustainable Development Goals (SDGs) and the European Green Deal priorities.</p>
+
+                <p class="about-paragraph">The project aims to integrate sustainability approaches into higher education institutions through curriculum modernization, capacity building, and green pilot initiatives across partner campuses.</p>
+
+                <p class="about-paragraph">The project will be implemented during <strong>2025–2028</strong> with 9 partner universities from Uzbekistan, Poland, Lithuania, and Türkiye.</p>
+            </div>
+
+            <div class="about-visual">
+                <div class="image-card">
+                    <div class="image-placeholder">
+                        <div class="image-pattern"></div>
+                        <div class="image-icon-wrap">
+                            <img src="{% static 'img/volunteer.jpg' %}" alt="GreenCamUz" class="action-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ program.title }} - Green Campus Initiative{% endblock %}
+
+{% block content %}
+<!-- Program Detail Section -->
+<section class="about-section" style="padding-top: 120px;">
+    <div class="section-content">
+        <div class="detail-container-wide">
+            <!-- Back Link -->
+            <a href="{% url 'programs:list' %}" class="back-link">
+                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5"/>
+                    <path d="m12 19-7-7 7-7"/>
+                </svg>
+                Back to Programs
+            </a>
+
+            <!-- Title -->
+            <h1 class="detail-title">
+                {{ program.title }}
+            </h1>
+
+            <!-- Meta Info -->
+            <div class="detail-meta" style="gap: 30px;">
+                {% if program.duration %}
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    <span>{{ program.duration }}</span>
+                </div>
+                {% endif %}
+                {% if program.participants %}
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    <span>{{ program.participants }} Participants</span>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Featured Image -->
+            {% if program.image %}
+            <div class="detail-image-container">
+                <img src="{{ program.image.url }}" alt="{{ program.title }}" class="detail-image">
+            </div>
+            {% endif %}
+
+            <!-- Overview -->
+            <div style="margin-bottom: 50px;">
+                <h2 class="detail-section-title">
+                    Overview
+                </h2>
+                <div class="detail-content" style="font-size: 17px;">
+                    {{ program.overview|linebreaks }}
+                </div>
+            </div>
+
+            <!-- Objectives -->
+            <div style="margin-bottom: 50px;">
+                <h2 class="detail-section-title">
+                    Objectives
+                </h2>
+                <div class="detail-excerpt" style="font-size: 16px; font-weight: normal;">
+                    {{ program.objectives|linebreaks }}
+                </div>
+            </div>
+
+            <!-- Impact -->
+            {% if program.impact %}
+            <div style="margin-bottom: 50px;">
+                <h2 class="detail-section-title">
+                    Impact
+                </h2>
+                <div class="detail-excerpt" style="font-size: 16px; font-weight: normal;">
+                    {{ program.impact|linebreaks }}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Join Program CTA -->
+            <div class="cta-box">
+                <h3 class="cta-box-title">Interested in This Program?</h3>
+                <p class="cta-box-text">Join us in making campuses more sustainable and environmentally friendly.</p>
+                <button class="primary-btn" style="margin: 0 auto;">
+                    <span>Get Involved</span>
+                    <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"/>
+                        <path d="m12 5 7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

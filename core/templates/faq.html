@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}FAQ - Green Campus Initiative{% endblock %}
+
+{% block content %}
+<section class="static-page-section">
+    <div class="section-content">
+        <div class="page-header">
+            <span class="section-tag">Help Center</span>
+            <h1 class="page-title">Frequently Asked Questions</h1>
+            <p class="page-subtitle">Find answers to common questions about Green Campus Initiative</p>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item">
+                <h3 class="faq-question">What is Green Campus Initiative?</h3>
+                <p class="faq-answer">Green Campus Initiative is a comprehensive program aimed at transforming university campuses into sustainable, environmentally-friendly spaces through various ecological projects and community engagement.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">How can I participate?</h3>
+                <p class="faq-answer">You can participate by joining our volunteer programs, attending events, or partnering with us. Visit our Contact page to get started.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Are the events free to attend?</h3>
+                <p class="faq-answer">Most of our events are free and open to all students, faculty, and community members. Some specialized workshops may require registration.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">How is the initiative funded?</h3>
+                <p class="faq-answer">We receive funding through university partnerships, grants, corporate sponsorships, and community donations. All funds are transparently managed for environmental projects.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Can other universities join?</h3>
+                <p class="faq-answer">Yes! We welcome partnerships with universities across the region. Contact us to discuss how we can collaborate.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">What impact have you achieved so far?</h3>
+                <p class="faq-answer">We've implemented 89+ eco-projects, reduced carbon emissions by 47%, planted 2.3M trees, and engaged over 12,000 active participants across partner universities.</p>
+            </div>
+        </div>
+
+        <div class="page-cta">
+            <h3 class="cta-title">Still have questions?</h3>
+            <p class="cta-subtitle">We're here to help! Reach out to us and we'll get back to you as soon as possible.</p>
+            <a href="{% url 'contact:contact' %}" class="btn-primary-green">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect width="20" height="16" x="2" y="4" rx="2"/>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                </svg>
+                Contact Us
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ news.title }} - Green Campus Initiative{% endblock %}
+
+{% block content %}
+<!-- News Detail Section -->
+<section class="about-section" style="padding-top: 120px;">
+    <div class="section-content">
+        <div class="detail-container">
+            <!-- Back Link -->
+            <a href="{% url 'news:list' %}" class="back-link">
+                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5"/>
+                    <path d="m12 19-7-7 7-7"/>
+                </svg>
+                Back to News
+            </a>
+
+            <!-- Title -->
+            <h1 class="detail-title-large">
+                {{ news.title }}
+            </h1>
+
+            <!-- Date -->
+            <div class="detail-meta">
+                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <span>{{ news.created_at|date:"F d, Y" }}</span>
+            </div>
+
+            <!-- Featured Image -->
+            {% if news.image %}
+            <div class="detail-image-container">
+                <img src="{{ news.image.url }}" alt="{{ news.title }}" class="detail-image">
+                <!-- Category Badge on Image -->
+                <div style="position: absolute; top: 16px; right: 16px;">
+                    <span class="news-badge" style="backdrop-filter: blur(8px); background: rgba(46, 91, 21, 0.95);">{{ news.get_category_display }}</span>
+                </div>
+            </div>
+            {% else %}
+            <!-- Category Badge without image -->
+            <div style="margin-bottom: 30px;">
+                <span class="news-badge">{{ news.get_category_display }}</span>
+            </div>
+            {% endif %}
+
+            <!-- Excerpt -->
+            <div class="detail-excerpt">
+                {{ news.excerpt }}
+            </div>
+
+            <!-- Content -->
+            <div class="detail-content">
+                {{ news.content|linebreaks }}
+            </div>
+
+            <!-- Share Section -->
+            <div class="share-section">
+                <h3 class="detail-section-title">Share this article</h3>
+                <div class="share-buttons">
+                    <a href="https://facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" rel="noopener noreferrer" class="share-button">
+                        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ news.title }}" target="_blank" rel="noopener noreferrer" class="share-button">
+                        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ news.title }}" target="_blank" rel="noopener noreferrer" class="share-button">
+                        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                            <rect width="4" height="12" x="2" y="9"/>
+                            <circle cx="4" cy="4" r="2"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
