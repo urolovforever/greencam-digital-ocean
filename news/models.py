@@ -17,6 +17,7 @@ class News(models.Model):
     excerpt = models.TextField(max_length=300, verbose_name="Excerpt", help_text="Short description for list view")
     content = models.TextField(verbose_name="Content", help_text="Full article content for detail view")
     image = models.ImageField(upload_to='news/', verbose_name="Image", blank=True, null=True)
+    video = models.FileField(upload_to='news/videos/', verbose_name="Video", blank=True, null=True, help_text="Upload MP4, WebM, or OGG video")
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='environment', verbose_name="Category")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

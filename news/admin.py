@@ -26,7 +26,7 @@ class NewsAdmin(admin.ModelAdmin):
             'fields': ('title', 'slug', 'category')
         }),
         ('Content', {
-            'fields': ('image', 'excerpt', 'content')
+            'fields': ('image', 'video', 'excerpt', 'content')
         }),
         ('Settings', {
             'fields': ('is_published', 'is_featured')
