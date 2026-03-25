@@ -18,63 +18,51 @@
             </a>
 
             <!-- Title -->
-            <h1 class="detail-title-large">
-                {{ news.title }}
-            </h1>
+            <h1 class="detail-title-large">{{ news.title }}</h1>
 
-            <!-- Date -->
+            <!-- Date & Category -->
             <div class="detail-meta">
                 <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"/>
                     <polyline points="12 6 12 12 16 14"/>
                 </svg>
                 <span>{{ news.created_at|date:"F d, Y" }}</span>
+                <span class="news-badge" style="margin-left: 12px;">{{ news.get_category_display }}</span>
             </div>
-
-            <!-- Featured Image -->
-            {% if news.image %}
-            <div class="detail-image-container">
-                <img src="{{ news.image.url }}" alt="{{ news.title }}" class="detail-image">
-                <!-- Category Badge on Image -->
-                <div style="position: absolute; top: 16px; right: 16px;">
-                    <span class="news-badge" style="backdrop-filter: blur(8px); background: rgba(46, 91, 21, 0.95);">{{ news.get_category_display }}</span>
-                </div>
-            </div>
-            {% else %}
-            <!-- Category Badge without image -->
-            <div style="margin-bottom: 30px;">
-                <span class="news-badge">{{ news.get_category_display }}</span>
-            </div>
-            {% endif %}
-
-            <!-- Video -->
-            {% if news.video %}
-            <div class="detail-image-container" style="margin-bottom: 30px;">
-                <video controls style="width: 100%; border-radius: 16px;">
-                    <source src="{{ news.video.url }}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-            {% endif %}
 
             <!-- Excerpt -->
-            <div class="detail-excerpt">
-                {{ news.excerpt }}
-            </div>
+            <div class="detail-excerpt">{{ news.excerpt }}</div>
 
             <!-- Content -->
-            <div class="detail-content">
-                {{ news.content|linebreaks }}
-            </div>
+            <div class="detail-content">{{ news.content|linebreaks }}</div>
 
-            <!-- Gallery Images -->
-            {% if news.images.all %}
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; margin-top: 30px; margin-bottom: 30px;">
-                {% for img in news.images.all %}
-                <div style="border-radius: 12px; overflow: hidden;">
-                    <img src="{{ img.image.url }}" alt="{{ news.title }}" style="width: 100%; height: 200px; object-fit: cover; display: block;">
+            <!-- Media Gallery -->
+            {% if news.media.count > 0 %}
+            <div style="margin-top: 40px; margin-bottom: 40px;">
+                <h3 class="detail-section-title">Gallery</h3>
+                <div class="event-gallery-grid">
+                    {% for item in news.media.all %}
+                    <div class="event-gallery-item" onclick="openLightbox({{ forloop.counter0 }})">
+                        {% if item.media_type == 'video' %}
+                        <div class="gallery-video-thumb">
+                            <video preload="metadata" muted>
+                                <source src="{{ item.file.url }}" type="video/mp4">
+                            </video>
+                            <div class="gallery-play-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="1">
+                                    <polygon points="5 3 19 12 5 21 5 3"/>
+                                </svg>
+                            </div>
+                        </div>
+                        {% else %}
+                        <img src="{{ item.file.url }}" alt="{{ item.caption|default:news.title }}">
+                        {% endif %}
+                        {% if item.caption %}
+                        <p class="gallery-caption">{{ item.caption }}</p>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
             {% endif %}
 
@@ -104,4 +92,64 @@
         </div>
     </div>
 </section>
+
+<!-- Lightbox -->
+<div id="lightbox" class="event-lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+    <button class="lightbox-prev" onclick="navigateLightbox(-1, event)">&#10094;</button>
+    <button class="lightbox-next" onclick="navigateLightbox(1, event)">&#10095;</button>
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+        <div id="lightboxMedia"></div>
+        <p id="lightboxCaption" class="lightbox-caption"></p>
+    </div>
+</div>
+
+<script>
+var mediaItems = [
+    {% for item in news.media.all %}
+    { type: '{{ item.media_type }}', url: '{{ item.file.url }}', caption: '{{ item.caption|escapejs }}' }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+];
+var currentIndex = 0;
+
+function openLightbox(index) {
+    currentIndex = index;
+    showMedia(index);
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(e) {
+    if (e) e.stopPropagation();
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+    document.getElementById('lightboxMedia').innerHTML = '';
+}
+
+function navigateLightbox(dir, e) {
+    if (e) e.stopPropagation();
+    currentIndex = (currentIndex + dir + mediaItems.length) % mediaItems.length;
+    showMedia(currentIndex);
+}
+
+function showMedia(index) {
+    var item = mediaItems[index];
+    var container = document.getElementById('lightboxMedia');
+    var caption = document.getElementById('lightboxCaption');
+    if (item.type === 'video') {
+        container.innerHTML = '<video controls autoplay style="max-width:90vw; max-height:80vh; border-radius:8px;"><source src="' + item.url + '" type="video/mp4"></video>';
+    } else {
+        container.innerHTML = '<img src="' + item.url + '" alt="' + item.caption + '" style="max-width:90vw; max-height:80vh; border-radius:8px; object-fit:contain;">';
+    }
+    caption.textContent = item.caption || '';
+}
+
+document.addEventListener('keydown', function(e) {
+    var lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox(e);
+    if (e.key === 'ArrowLeft') navigateLightbox(-1, e);
+    if (e.key === 'ArrowRight') navigateLightbox(1, e);
+});
+</script>
 {% endblock %}

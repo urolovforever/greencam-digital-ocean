@@ -16,12 +16,10 @@
             {% for program in programs %}
             <div class="program-card">
                 <div class="program-icon-wrap">
-                    {% if program.icon %}
-                        <img src="{{ program.icon.url }}" alt="{{ program.title }}" class="program-icon-img">
-                    {% elif program.image %}
-                        <img src="{{ program.image.url }}" alt="{{ program.title }}" class="program-icon-img">
+                    {% if program.cover_image %}
+                        <img src="{{ program.cover_image.url }}" alt="{{ program.title }}" class="program-icon-img">
                     {% else %}
-                        <img src="{% static 'img/volunteer.jpg' %}" alt="{{ program.title }}" class="program-icon-img">
+                        <div class="media-placeholder"><span>GreenCam</span></div>
                     {% endif %}
                 </div>
                 <h3 class="program-title">{{ program.title }}</h3>

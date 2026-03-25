@@ -5,129 +5,159 @@
 
 {% block content %}
 <!-- Event Detail Section -->
-<section class="event-detail-section">
+<section class="about-section" style="padding-top: 120px;">
     <div class="section-content">
-        <!-- Back Button -->
-        <div class="back-nav">
+        <div class="detail-container">
+            <!-- Back Link -->
             <a href="{% url 'events:list' %}" class="back-link">
-                <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M19 12H5"/>
                     <path d="m12 19-7-7 7-7"/>
                 </svg>
                 Back to Events
             </a>
-        </div>
 
-        <div class="event-detail-container">
-            <!-- Event Information -->
-            <div class="event-info-card">
-                <div class="event-header-detail">
-                    <span class="section-tag">Event Details</span>
-                    <h1 class="event-title-detail">{{ event.name }}</h1>
-                </div>
+            <!-- Title -->
+            <h1 class="detail-title-large">{{ event.name }}</h1>
 
-                <div class="event-meta-grid">
-                    <div class="event-meta-item">
-                        <svg class="icon-large" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
-                            <line x1="16" x2="16" y1="2" y2="6"/>
-                            <line x1="8" x2="8" y1="2" y2="6"/>
-                            <line x1="3" x2="21" y1="10" y2="10"/>
-                        </svg>
-                        <div>
-                            <p class="meta-label">Date</p>
-                            <p class="meta-value">{{ event.date|date:"F d, Y" }}</p>
-                        </div>
-                    </div>
-
-                    <div class="event-meta-item">
-                        <svg class="icon-large" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
-                            <circle cx="12" cy="10" r="3"/>
-                        </svg>
-                        <div>
-                            <p class="meta-label">Location</p>
-                            <p class="meta-value">{{ event.location }}</p>
-                        </div>
-                    </div>
-                </div>
-
-                {% if event.description %}
-                <div class="event-description">
-                    <h3 class="description-title">About This Event</h3>
-                    <p class="description-text">{{ event.description|linebreaks }}</p>
-                </div>
-                {% endif %}
+            <!-- Date & Location -->
+            <div class="detail-meta">
+                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                    <line x1="16" x2="16" y1="2" y2="6"/>
+                    <line x1="8" x2="8" y1="2" y2="6"/>
+                    <line x1="3" x2="21" y1="10" y2="10"/>
+                </svg>
+                <span>{{ event.date|date:"F d, Y" }}</span>
+                <span style="margin: 0 8px; color: rgba(26,26,46,0.3);">|</span>
+                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                </svg>
+                <span>{{ event.location }}</span>
             </div>
 
-            <!-- Registration Form -->
-            <div class="registration-card">
-                <div class="registration-header">
-                    <h2 class="registration-title">Register for Event</h2>
-                    <p class="registration-subtitle">Fill out the form below to register</p>
-                </div>
+            <!-- Description -->
+            {% if event.description %}
+            <div class="detail-excerpt">{{ event.description|truncatewords:40 }}</div>
 
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }}">
-                            {{ message }}
+            <div class="detail-content">{{ event.description|linebreaks }}</div>
+            {% endif %}
+
+            <!-- Media Gallery -->
+            {% if event.media.count > 0 %}
+            <div style="margin-top: 40px; margin-bottom: 40px;">
+                <h3 class="detail-section-title">Gallery</h3>
+                <div class="event-gallery-grid">
+                    {% for item in event.media.all %}
+                    <div class="event-gallery-item" onclick="openLightbox({{ forloop.counter0 }})">
+                        {% if item.media_type == 'video' %}
+                        <div class="gallery-video-thumb">
+                            <video preload="metadata" muted>
+                                <source src="{{ item.file.url }}" type="video/mp4">
+                            </video>
+                            <div class="gallery-play-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="1">
+                                    <polygon points="5 3 19 12 5 21 5 3"/>
+                                </svg>
+                            </div>
                         </div>
+                        {% else %}
+                        <img src="{{ item.file.url }}" alt="{{ item.caption|default:event.name }}">
+                        {% endif %}
+                        {% if item.caption %}
+                        <p class="gallery-caption">{{ item.caption }}</p>
+                        {% endif %}
+                    </div>
                     {% endfor %}
-                {% endif %}
+                </div>
+            </div>
+            {% endif %}
 
-                <form method="post" class="registration-form" novalidate>
-                    {% csrf_token %}
-
-                    <div class="form-group">
-                        <label for="{{ form.full_name.id_for_label }}" class="form-label">
-                            {{ form.full_name.label }} <span class="required">*</span>
-                        </label>
-                        {{ form.full_name }}
-                        {% if form.full_name.errors %}
-                            <div class="form-error">{{ form.full_name.errors.0 }}</div>
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        <label for="{{ form.email.id_for_label }}" class="form-label">
-                            {{ form.email.label }} <span class="required">*</span>
-                        </label>
-                        {{ form.email }}
-                        {% if form.email.errors %}
-                            <div class="form-error">{{ form.email.errors.0 }}</div>
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        <label for="{{ form.phone.id_for_label }}" class="form-label">
-                            {{ form.phone.label }} <span class="required">*</span>
-                        </label>
-                        {{ form.phone }}
-                        {% if form.phone.errors %}
-                            <div class="form-error">{{ form.phone.errors.0 }}</div>
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group">
-                        <label for="{{ form.note.id_for_label }}" class="form-label">
-                            {{ form.note.label }}
-                        </label>
-                        {{ form.note }}
-                        {% if form.note.errors %}
-                            <div class="form-error">{{ form.note.errors.0 }}</div>
-                        {% endif %}
-                    </div>
-
-                    <button type="submit" class="btn-submit">
-                        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                            <polyline points="9 22 9 12 15 12 15 22"/>
+            <!-- Share Section -->
+            <div class="share-section">
+                <h3 class="detail-section-title">Share this event</h3>
+                <div class="share-buttons">
+                    <a href="https://facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" rel="noopener noreferrer" class="share-button">
+                        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
                         </svg>
-                        Submit Registration
-                    </button>
-                </form>
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ event.name }}" target="_blank" rel="noopener noreferrer" class="share-button">
+                        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ event.name }}" target="_blank" rel="noopener noreferrer" class="share-button">
+                        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                            <rect width="4" height="12" x="2" y="9"/>
+                            <circle cx="4" cy="4" r="2"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Lightbox -->
+<div id="lightbox" class="event-lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+    <button class="lightbox-prev" onclick="navigateLightbox(-1, event)">&#10094;</button>
+    <button class="lightbox-next" onclick="navigateLightbox(1, event)">&#10095;</button>
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+        <div id="lightboxMedia"></div>
+        <p id="lightboxCaption" class="lightbox-caption"></p>
+    </div>
+</div>
+
+<script>
+var mediaItems = [
+    {% for item in event.media.all %}
+    { type: '{{ item.media_type }}', url: '{{ item.file.url }}', caption: '{{ item.caption|escapejs }}' }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+];
+var currentIndex = 0;
+
+function openLightbox(index) {
+    currentIndex = index;
+    showMedia(index);
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(e) {
+    if (e) e.stopPropagation();
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+    document.getElementById('lightboxMedia').innerHTML = '';
+}
+
+function navigateLightbox(dir, e) {
+    if (e) e.stopPropagation();
+    currentIndex = (currentIndex + dir + mediaItems.length) % mediaItems.length;
+    showMedia(currentIndex);
+}
+
+function showMedia(index) {
+    var item = mediaItems[index];
+    var container = document.getElementById('lightboxMedia');
+    var caption = document.getElementById('lightboxCaption');
+    if (item.type === 'video') {
+        container.innerHTML = '<video controls autoplay style="max-width:90vw; max-height:80vh; border-radius:8px;"><source src="' + item.url + '" type="video/mp4"></video>';
+    } else {
+        container.innerHTML = '<img src="' + item.url + '" alt="' + item.caption + '" style="max-width:90vw; max-height:80vh; border-radius:8px; object-fit:contain;">';
+    }
+    caption.textContent = item.caption || '';
+}
+
+document.addEventListener('keydown', function(e) {
+    var lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox(e);
+    if (e.key === 'ArrowLeft') navigateLightbox(-1, e);
+    if (e.key === 'ArrowRight') navigateLightbox(1, e);
+});
+</script>
 {% endblock %}

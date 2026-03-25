@@ -16,10 +16,10 @@
             <div class="news-card">
                 <div class="news-image">
                     <div class="news-image-placeholder">
-                        {% if news.image %}
-                            <img src="{{ news.image.url }}" alt="{{ news.title }}" class="news-icon-img">
+                        {% if news.cover_image %}
+                            <img src="{{ news.cover_image.url }}" alt="{{ news.title }}" class="news-icon-img">
                         {% else %}
-                            <img src="{% static 'img/volunteer.jpg' %}" alt="{{ news.title }}" class="news-icon-img">
+                            <div class="media-placeholder"><span>GreenCam</span></div>
                         {% endif %}
                     </div>
                     <div class="news-badge">{{ news.get_category_display }}</div>

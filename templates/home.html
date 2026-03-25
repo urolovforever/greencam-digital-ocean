@@ -31,7 +31,7 @@
                     <path d="m12 5 7 7-7 7"/>
                 </svg>
             </a>
-            <a href="{% url 'core:about' %}" class="secondary-btn">
+            <a href="#" class="secondary-btn" id="watchVideoBtn" onclick="openVideoModal(); return false;">
                 <div class="play-icon-wrap">
                     <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="#2e5b15" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polygon points="5 3 19 12 5 21 5 3"/>
@@ -48,10 +48,14 @@
     <div class="section-content">
         <div class="about-grid">
             <div class="about-text">
-                <span class="section-tag">About Green Campus Initiative</span>
-                <h2 class="section-title">A Mission That Unites Generations</h2>
+                <span class="section-tag">{{ about_content.tag|default:"About Green Campus Initiative" }}</span>
+                <h2 class="section-title">{{ about_content.title|default:"A Mission That Unites Generations" }}</h2>
+                {% if about_content %}
+                <div class="about-paragraph">{{ about_content.content|linebreaks }}</div>
+                {% else %}
                 <p class="about-paragraph">Green Campus Initiative: Integrating Sustainability into Higher Education in Uzbekistan (GreenCamUz) is an international project developed by partner higher education institutions from Uzbekistan, Europe, and Türkiye.</p>
                 <p class="about-paragraph">The project is funded by a €359,000 European Union grant under the Erasmus+ Capacity Building in Higher Education (CBHE) Strand 1 framework.</p>
+                {% endif %}
                 <div class="about-values">
                     <div class="value-item">
                         <div class="value-icon-wrap">
@@ -102,7 +106,11 @@
                     <div class="image-placeholder">
                         <div class="image-pattern"></div>
                         <div class="image-icon-wrap">
-                            <img src="{% static 'img/volunteer.jpg' %}" alt="Our volunteers in action" class="action-image">
+                            {% if about_image %}
+                            <img src="{{ about_image.image.url }}" alt="{{ about_image.caption|default:'GreenCamUz' }}" class="action-image">
+                            {% else %}
+                            <div class="media-placeholder" style="min-height: 300px;"><span>GreenCam</span></div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -123,12 +131,10 @@
             {% for program in programs %}
             <a href="{% url 'programs:detail' program.slug %}" class="program-card" style="text-decoration: none; color: inherit;">
                 <div class="program-icon-wrap">
-                    {% if program.icon %}
-                        <img src="{{ program.icon.url }}" alt="{{ program.title }}" class="program-icon-img">
-                    {% elif program.image %}
-                        <img src="{{ program.image.url }}" alt="{{ program.title }}" class="program-icon-img">
+                    {% if program.cover_image %}
+                        <img src="{{ program.cover_image.url }}" alt="{{ program.title }}" class="program-icon-img">
                     {% else %}
-                        <img src="{% static 'img/volunteer.jpg' %}" alt="{{ program.title }}" class="program-icon-img">
+                        <div class="media-placeholder"><span>GreenCam</span></div>
                     {% endif %}
                 </div>
                 <h3 class="program-title">{{ program.title }}</h3>
@@ -168,10 +174,10 @@
             <a href="{% url 'news:detail' news.slug %}" class="news-card" style="text-decoration: none; color: inherit;">
                 <div class="news-image">
                     <div class="news-image-placeholder">
-                        {% if news.image %}
-                            <img src="{{ news.image.url }}" alt="{{ news.title }}" class="news-icon-img">
+                        {% if news.cover_image %}
+                            <img src="{{ news.cover_image.url }}" alt="{{ news.title }}" class="news-icon-img">
                         {% else %}
-                            <img src="{% static 'img/volunteer.jpg' %}" alt="{{ news.title }}" class="news-icon-img">
+                            <div class="media-placeholder"><span>GreenCam</span></div>
                         {% endif %}
                     </div>
                     <div class="news-badge">{{ news.get_category_display }}</div>
@@ -299,4 +305,35 @@
     </div>
 </section>
 {% endif %}
+
+<!-- Video Modal -->
+<div id="videoModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; justify-content:center; align-items:center;">
+    <div style="position:relative; width:90%; max-width:900px;">
+        <button onclick="closeVideoModal()" style="position:absolute; top:-40px; right:0; background:none; border:none; color:#fff; font-size:32px; cursor:pointer; z-index:10000;">&times;</button>
+        <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px;">
+            <iframe id="videoIframe" style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+        </div>
+    </div>
+</div>
+
+<script>
+function openVideoModal() {
+    var modal = document.getElementById('videoModal');
+    var iframe = document.getElementById('videoIframe');
+    iframe.src = 'https://www.youtube-nocookie.com/embed/Oextk-If8HQ?autoplay=1&rel=0&origin=' + window.location.origin;
+    modal.style.display = 'flex';
+}
+function closeVideoModal() {
+    var modal = document.getElementById('videoModal');
+    var iframe = document.getElementById('videoIframe');
+    iframe.src = '';
+    modal.style.display = 'none';
+}
+document.getElementById('videoModal').addEventListener('click', function(e) {
+    if (e.target === this) closeVideoModal();
+});
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeVideoModal();
+});
+</script>
 {% endblock %}

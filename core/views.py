@@ -4,28 +4,35 @@ from programs.models import Program
 from news.models import News
 from events.models import Event
 from partners.models import Partner
-from .models import Material
+from .models import Material, AboutContent, AboutImage
 
 
 def home(request):
     """Home page view"""
     featured_programs = Program.objects.filter(is_active=True, is_featured=True)[:4]
     featured_news = News.objects.filter(is_published=True, is_featured=True)[:3]
-    featured_events = Event.objects.filter(is_featured=True)[:3]
+    featured_events = Event.objects.filter(is_active=True, is_featured=True)[:3]
     partners = Partner.objects.filter(is_active=True)
+
+    about_image = AboutImage.objects.filter(is_featured=True).first()
+    about_content = AboutContent.objects.filter(page='home').first()
 
     context = {
         'programs': featured_programs,
         'news_list': featured_news,
         'events': featured_events,
         'partners': partners,
+        'about_image': about_image,
+        'about_content': about_content,
     }
     return render(request, 'home.html', context)
 
 
 def about(request):
     """About page view"""
-    return render(request, 'about.html')
+    images = AboutImage.objects.all()
+    about_content = AboutContent.objects.filter(page='about').first()
+    return render(request, 'about.html', {'about_images': images, 'about_content': about_content})
 
 
 def faq(request):

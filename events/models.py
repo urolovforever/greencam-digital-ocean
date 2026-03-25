@@ -7,6 +7,7 @@ class Event(models.Model):
     date = models.DateField(verbose_name="Event Date")
     location = models.CharField(max_length=200, verbose_name="Location")
     description = models.TextField(verbose_name="Description", blank=True)
+    is_active = models.BooleanField(default=True, verbose_name="Active")
     is_featured = models.BooleanField(default=False, verbose_name="Featured on Homepage")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -18,6 +19,27 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class EventMedia(models.Model):
+    """Media files (images and videos) for events"""
+    MEDIA_TYPE_CHOICES = [
+        ('image', 'Image'),
+        ('video', 'Video'),
+    ]
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='media', verbose_name="Event")
+    media_type = models.CharField(max_length=5, choices=MEDIA_TYPE_CHOICES, verbose_name="Type")
+    file = models.FileField(upload_to='events/media/', verbose_name="File")
+    caption = models.CharField(max_length=255, blank=True, verbose_name="Caption")
+    order = models.PositiveIntegerField(default=0, verbose_name="Order")
+
+    class Meta:
+        ordering = ['order', 'id']
+        verbose_name = "Event Media"
+        verbose_name_plural = "Event Media"
+
+    def __str__(self):
+        return f"{self.get_media_type_display()} - {self.event.name}"
 
 
 class Registration(models.Model):
