@@ -19,7 +19,7 @@
                         {% if news.cover_image %}
                             <img src="{{ news.cover_image.url }}" alt="{{ news.title }}" class="news-icon-img">
                         {% else %}
-                            <div class="media-placeholder"><span>GreenCam</span></div>
+                            <div class="media-placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 17 3.5s1.5 5 .8 10.5A7 7 0 0 1 11 20"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg><span>GreenCam</span></div>
                         {% endif %}
                     </div>
                     <div class="news-badge">{{ news.get_category_display }}</div>
