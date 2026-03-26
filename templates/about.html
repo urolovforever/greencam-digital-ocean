@@ -4,32 +4,17 @@
 {% block title %}About - GreenCamUz{% endblock %}
 
 {% block content %}
-<!-- About Section -->
+<!-- About the Project Section (with image) -->
 <section class="about-section" id="about" style="padding-top: 140px;">
     <div class="section-content">
         <div class="about-grid">
             <div class="about-text">
-                <span class="section-tag">{{ about_content.tag|default:"About GreenCamUz" }}</span>
-                <h2 class="section-title">{{ about_content.title|default:"Green Campus Initiative: Integrating Sustainability into Higher Education in Uzbekistan" }}</h2>
+                <span class="section-tag">About GreenCamUz</span>
+                <h2 class="section-title">About the Project</h2>
 
-                {% if about_content %}
-                <div class="about-paragraph">{{ about_content.content|linebreaks }}</div>
-                {% else %}
-                <p class="about-paragraph"><strong>Green Campus Initiative: Integrating Sustainability into Higher Education in Uzbekistan (GreenCamUz)</strong> is an international project developed by partner higher education institutions from Uzbekistan, Europe, and Türkiye. The project is funded by a <strong>€359,000 European Union grant</strong> under the Erasmus+ Capacity Building in Higher Education (CBHE) Strand 1 framework.</p>
+                <p class="about-paragraph"><strong>GreenCamUz — Green Campus Initiative: Integrating Sustainability into Higher Education in Uzbekistan</strong> — is an international project bringing together higher education institutions from Uzbekistan, Europe, and Türkiye to embed sustainability at the core of academic life.</p>
 
-                <p class="about-paragraph">GreenCamUz is the <strong>only project in Uzbekistan</strong> funded under the CBHE Strand 1 category. It is implemented in line with the United Nations Sustainable Development Goals (SDGs) and the European Green Deal priorities.</p>
-
-                <p class="about-paragraph">The project aims to integrate sustainability approaches into higher education institutions. Its activities focus on curriculum modernization, capacity building for academic and administrative staff, and the implementation of green pilot initiatives across partner campuses.</p>
-
-                <p class="about-paragraph"><strong>Project duration:</strong> 1 October 2025 – 30 September 2028</p>
-
-                <p class="about-paragraph"><strong>Partner institutions:</strong></p>
-                <ul class="about-paragraph" style="list-style: none; padding-left: 0; margin-bottom: 16px; color: rgba(255,255,255,0.75); line-height: 1.8;">
-                    <li>🇺🇿 <strong>Uzbekistan:</strong> Kokand University, Kokand University Andijan Branch, Tashkent International University, Republican Higher School of Business and Entrepreneurship, Central Asian Green University, Andijan State Technical Institute</li>
-                    <li>🇪🇺 <strong>Europe:</strong> University of Opole (Poland), Vilnius Tech University (Lithuania)</li>
-                    <li>🇹🇷 <strong>Türkiye:</strong> Karabuk University</li>
-                </ul>
-                {% endif %}
+                <p class="about-paragraph">The project is funded by a <strong>€359,000 European Union grant</strong> under the Erasmus+ Capacity Building in Higher Education (CBHE) Strand 1 framework, making GreenCamUz the <strong>only project of its kind in Uzbekistan</strong> under this category. It is implemented in alignment with the United Nations Sustainable Development Goals (SDGs) and the priorities of the European Green Deal.</p>
             </div>
 
             <div class="about-visual">
@@ -64,6 +49,44 @@
                 </div>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- What We Do Section -->
+<section class="about-section">
+    <div class="section-content">
+        <span class="section-tag">Our Mission</span>
+        <h2 class="section-title">What We Do</h2>
+
+        <p class="about-paragraph">GreenCamUz focuses on three interconnected pillars: modernizing curricula to reflect sustainability principles, building the capacity of academic and administrative staff through targeted green technology training, and launching hands-on pilot initiatives across partner campuses.</p>
+
+        <p class="about-paragraph">Over the course of the project (2025–2028), key outcomes include updated sustainability-oriented curricula across 12 academic disciplines, green technology training for 48 academic and 24 administrative staff members, a Green Campus Ambassadors network of 120 participants, six campus-level pilot projects, an Annual Green Campus Conference with over 200 participants, a virtual knowledge platform serving more than 1,000 users, and active cooperation with over 12 local businesses and non-governmental organizations.</p>
+    </div>
+</section>
+
+<!-- Our Partners Section -->
+<section class="about-section">
+    <div class="section-content">
+        <span class="section-tag">Consortium</span>
+        <h2 class="section-title">Our Partners</h2>
+
+        <p class="about-paragraph">The project unites nine higher education institutions across three regions:</p>
+
+        <ul style="list-style: none; padding-left: 0; margin-bottom: 16px; color: rgba(255,255,255,0.75); line-height: 2; font-size: 16px;">
+            <li>🇺🇿 <strong>Uzbekistan:</strong> Kokand University, Kokand University Andijan Branch, Tashkent International University, Republican Higher School of Business and Entrepreneurship, Central Asian Green University, Andijan State Technical Institute</li>
+            <li>🇪🇺 <strong>Europe:</strong> University of Opole (Poland), Vilnius Tech University (Lithuania)</li>
+            <li>🇹🇷 <strong>Türkiye:</strong> Karabuk University</li>
+        </ul>
+    </div>
+</section>
+
+<!-- Our Vision Section -->
+<section class="about-section" style="padding-bottom: 80px;">
+    <div class="section-content">
+        <span class="section-tag">Looking Ahead</span>
+        <h2 class="section-title">Our Vision</h2>
+
+        <p class="about-paragraph">GreenCamUz is more than a project — it is a long-term commitment to transforming how universities in Uzbekistan think, teach, and operate. By connecting local institutions with European and Turkish partners, we aim to build a generation of graduates and professionals equipped to lead sustainable development in Central Asia and beyond.</p>
     </div>
 </section>
 
