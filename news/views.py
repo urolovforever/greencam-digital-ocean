@@ -5,7 +5,7 @@ from .models import News
 
 def news_list(request):
     """News list view with pagination"""
-    news_queryset = News.objects.filter(is_published=True)
+    news_queryset = News.objects.filter(is_published=True).order_by('-created_at')
     paginator = Paginator(news_queryset, 6)  # 6 items per page
 
     page_number = request.GET.get('page')

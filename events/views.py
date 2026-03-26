@@ -5,7 +5,7 @@ from .models import Event
 
 def event_list(request):
     """Events list view with pagination"""
-    events_queryset = Event.objects.filter(is_active=True)
+    events_queryset = Event.objects.filter(is_active=True).order_by('-created_at')
     paginator = Paginator(events_queryset, 6)
 
     page_number = request.GET.get('page')

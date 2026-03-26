@@ -9,9 +9,9 @@ from .models import Material, AboutContent, AboutImage
 
 def home(request):
     """Home page view"""
-    featured_programs = Program.objects.filter(is_active=True, is_featured=True)[:4]
-    featured_news = News.objects.filter(is_published=True, is_featured=True)[:3]
-    featured_events = Event.objects.filter(is_active=True, is_featured=True)[:3]
+    featured_programs = Program.objects.filter(is_active=True, is_featured=True).order_by('-created_at')[:4]
+    featured_news = News.objects.filter(is_published=True, is_featured=True).order_by('-created_at')[:3]
+    featured_events = Event.objects.filter(is_active=True, is_featured=True).order_by('-created_at')[:3]
     partners = Partner.objects.filter(is_active=True)
 
     about_image = AboutImage.objects.filter(is_featured=True).first()
