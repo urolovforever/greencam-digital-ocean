@@ -5,9 +5,9 @@ from .models import Contact
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ('name', 'phone', 'subject', 'status_badge', 'created_at')
+    list_display = ('name', 'email', 'subject', 'status_badge', 'created_at')
     list_filter = ('status', 'created_at')
-    search_fields = ('name', 'phone', 'subject', 'message')
+    search_fields = ('name', 'email', 'subject', 'message')
     readonly_fields = ('created_at', 'updated_at')
     date_hierarchy = 'created_at'
     ordering = ('-created_at',)
@@ -38,7 +38,7 @@ class ContactAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Contact Information', {
-            'fields': ('name', 'phone', 'subject')
+            'fields': ('name', 'email', 'subject')
         }),
         ('Message', {
             'fields': ('message',)

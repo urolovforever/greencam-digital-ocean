@@ -11,7 +11,7 @@ class Contact(models.Model):
     ]
 
     name = models.CharField(max_length=200, verbose_name="Name")
-    phone = models.CharField(max_length=20, verbose_name="Phone Number", default='+998 00 000-00-00')
+    email = models.EmailField(verbose_name="Email Address")
     subject = models.CharField(max_length=300, verbose_name="Subject")
     message = models.TextField(verbose_name="Message")
     status = models.CharField(

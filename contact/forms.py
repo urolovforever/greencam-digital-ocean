@@ -7,14 +7,14 @@ class ContactForm(forms.ModelForm):
 
     class Meta:
         model = Contact
-        fields = ['name', 'phone', 'subject', 'message']
+        fields = ['name', 'email', 'subject', 'message']
         widgets = {
             'name': forms.TextInput(attrs={
                 'placeholder': 'Your Name',
                 'class': 'contact-input',
             }),
-            'phone': forms.TextInput(attrs={
-                'placeholder': '+998 90 123-45-67',
+            'email': forms.EmailInput(attrs={
+                'placeholder': 'your.email@example.com',
                 'class': 'contact-input',
             }),
             'subject': forms.TextInput(attrs={
@@ -29,7 +29,7 @@ class ContactForm(forms.ModelForm):
         }
         labels = {
             'name': 'Name',
-            'phone': 'Phone Number',
+            'email': 'Email',
             'subject': 'Subject',
             'message': 'Message',
         }
