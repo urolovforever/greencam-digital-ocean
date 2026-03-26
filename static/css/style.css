@@ -2589,6 +2589,27 @@ textarea.contact-input {
     font-size: 16px;
 }
 
+.gallery-filter-btn {
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.7);
+    background: rgba(46, 91, 21, 0.1);
+    border: 1px solid rgba(46, 91, 21, 0.2);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.gallery-filter-btn:hover {
+    background: rgba(46, 91, 21, 0.2);
+    color: #fff;
+}
+.gallery-filter-btn.active {
+    background: rgba(46, 91, 21, 0.6);
+    color: #fff;
+    border-color: rgba(46, 91, 21, 0.8);
+}
+
 /* Empty State Utilities */
 .empty-state {
     grid-column: 1 / -1;
