@@ -16,6 +16,9 @@ echo "PostgreSQL is ready."
 echo "Running migrations..."
 python manage.py migrate --noinput
 
+echo "Compiling translations..."
+python manage.py compilemessages
+
 echo "Collecting static files..."
 python manage.py collectstatic --noinput
 
