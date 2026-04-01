@@ -3101,6 +3101,7 @@ textarea.contact-input {
 .partners-section {
     padding: 80px 0;
     overflow: hidden;
+    background: transparent;
 }
 
 .partners-header {
@@ -3127,21 +3128,22 @@ textarea.contact-input {
 
 .partners-carousel-wrapper::before {
     left: 0;
-    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(90deg, rgba(250,255,254,1) 0%, rgba(250,255,254,0) 100%);
 }
 
 .partners-carousel-wrapper::after {
     right: 0;
-    background: linear-gradient(270deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(270deg, rgba(250,255,254,1) 0%, rgba(250,255,254,0) 100%);
 }
 
 .partners-carousel {
     display: flex;
     gap: 60px;
-    animation: scroll-partners 30s linear infinite;
+    animation: scroll-partners 40s linear infinite;
     width: fit-content;
     user-select: none;
     -webkit-user-select: none;
+    will-change: transform;
     touch-action: pan-x;
 }
 
