@@ -1,46 +1,57 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Terms of Use - Green Campus Initiative{% endblock %}
+{% block title %}{% trans "Terms of Use" %} - GreenCamUz{% endblock %}
+
+{% block extra_css %}
+<style>
+.legal-page { padding-top: 140px; padding-bottom: 80px; }
+.legal-page .section-content { max-width: 800px; }
+.legal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 48px; }
+.legal-header h1 { font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #2e5b15; padding-left: 20px; }
+.legal-breadcrumb { font-size: 14px; color: rgba(26,26,46,0.5); }
+.legal-breadcrumb a { color: rgba(26,26,46,0.5); text-decoration: none; }
+.legal-breadcrumb a:hover { color: #2e5b15; }
+.legal-updated { font-size: 14px; color: rgba(26,26,46,0.5); margin-bottom: 32px; }
+.legal-section { margin-bottom: 28px; }
+.legal-section h2 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: #2e5b15; margin-bottom: 10px; }
+.legal-section p { font-size: 15px; color: rgba(26,26,46,0.75); line-height: 1.8; }
+@media (max-width: 768px) { .legal-header { flex-direction: column; align-items: flex-start; gap: 8px; } .legal-header h1 { font-size: 32px; } }
+</style>
+{% endblock %}
 
 {% block content %}
-<section class="static-page-section">
+{% get_current_language as LANG %}
+<section class="about-section legal-page">
     <div class="section-content">
-        <div class="page-header">
-            <span class="section-tag">Legal</span>
-            <h1 class="page-title">Terms of Use</h1>
-            <p class="page-subtitle">Last updated: January 2026</p>
+        <div class="legal-header">
+            <h1>{% trans "Terms of Use" %}</h1>
+            <div class="legal-breadcrumb"><a href="{% url 'core:home' %}">{% trans "Home" %}</a> / {% trans "Terms of Use" %}</div>
         </div>
+        <p class="legal-updated">{% if LANG == 'uz' %}Oxirgi yangilanish: 2026-yil 1-aprel{% else %}Last updated: April 1, 2026{% endif %}</p>
 
-        <div class="content-block">
-            <h2 class="content-title">Acceptance of Terms</h2>
-            <p class="content-text">By accessing and using this website, you accept and agree to be bound by these Terms of Use. If you do not agree, please discontinue use immediately.</p>
-        </div>
-
-        <div class="content-block">
-            <h2 class="content-title">Use of Website</h2>
-            <p class="content-text">This website is provided for informational purposes about Green Campus Initiative programs, events, and activities. You may not use this site for any illegal or unauthorized purpose.</p>
-        </div>
-
-        <div class="content-block">
-            <h2 class="content-title">Intellectual Property</h2>
-            <p class="content-text">All content on this website, including text, graphics, logos, and images, is the property of Green Campus Initiative and protected by copyright laws.</p>
-        </div>
-
-        <div class="content-block">
-            <h2 class="content-title">Event Registration</h2>
-            <p class="content-text">When registering for events, you agree to provide accurate information. We reserve the right to cancel registrations that violate our policies.</p>
-        </div>
-
-        <div class="content-block">
-            <h2 class="content-title">Limitation of Liability</h2>
-            <p class="content-text">Green Campus Initiative is not liable for any damages arising from the use of this website or participation in our programs.</p>
-        </div>
-
-        <div class="content-block">
-            <h2 class="content-title">Changes to Terms</h2>
-            <p class="content-text">We reserve the right to modify these terms at any time. Continued use of the website constitutes acceptance of updated terms.</p>
-        </div>
+{% if LANG == 'uz' %}
+        <div class="legal-section"><h2>1. Umumiy</h2><p>Ushbu veb-sayt (greencam.uz) GreenCamUz loyihasining (No. 101234907) rasmiy veb-sayti bo'lib, Yevropa Ittifoqi tomonidan Erasmus+ CBHE Strand 1 dasturi doirasida moliyalashtirilgan. Ushbu veb-saytga kirib, siz ushbu Foydalanish shartlariga rozilik bildirasiz.</p></div>
+        <div class="legal-section"><h2>2. Intellektual mulk</h2><p>Ushbu veb-saytning kontenti, jumladan matn, rasmlar, logotiplar va hujjatlar GreenCamUz loyiha konsortsiumi mulki hisoblanadi. "Ommaviy" deb belgilangan loyiha natijalari tijorat bo'lmagan maqsadlarda erkin foydalanilishi mumkin. GreenCamUz logotipi loyiha koordinatorining yozma rozisizisiz ishlatilmasligi kerak.</p></div>
+        <div class="legal-section"><h2>3. YeI moliyalashtirish e'tirofi</h2><p>Yevropa Ittifoqi tomonidan moliyalashtirilgan. Bildirilgan fikr va mulohazalar faqat muallif(lar)ning shaxsiy pozitsiyasini aks ettiradi va Yevropa Ittifoqi yoki EACEA ning rasmiy nuqtai nazarini bildirmaydi.</p></div>
+        <div class="legal-section"><h2>4. Ma'lumotlarning aniqligi</h2><p>Biz ushbu veb-saytdagi ma'lumotlarni aniq va dolzarb saqlashga intilamiz. Biroq, kontentning to'liqligi, aniqligi yoki ishonchliligi haqida kafolat bermaymiz.</p></div>
+        <div class="legal-section"><h2>5. Uchinchi tomon havolalari</h2><p>Ushbu veb-saytda hamkor muassasalar va boshqa tashkilotlarning tashqi veb-saytlariga havolalar bo'lishi mumkin. Biz ushbu tashqi veb-saytlarning kontenti yoki maxfiylik amaliyotlari uchun javobgar emasmiz.</p></div>
+        <div class="legal-section"><h2>6. Foydalanish cheklovlari</h2><p>Siz ushbu veb-saytdan noqonuniy maqsadlarda foydalanmasligingiz, veb-saytga ruxsatsiz kirishga urinmasligingiz va tegishli atributsiyasiz kontentni qayta nashr etmasligingiz kerak.</p></div>
+        <div class="legal-section"><h2>7. Javobgarlikni cheklash</h2><p>GreenCamUz konsortsiumi, uning hamkor muassasalari va Yevropa Ittifoqi ushbu veb-saytdan foydalanish yoki uning kontentiga tayanish natijasida yuzaga kelgan har qanday zarar uchun javobgar bo'lmaydi.</p></div>
+        <div class="legal-section"><h2>8. Boshqaruvchi qonun</h2><p>Ushbu Foydalanish shartlari O'zbekiston Respublikasi qonunlari va tegishli Yevropa Ittifoqi reglamentlari bilan boshqariladi.</p></div>
+        <div class="legal-section"><h2>9. Bog'lanish</h2><p>greencamuz@gmail.com<br>+998 90 927 14 00</p></div>
+{% else %}
+        <div class="legal-section"><h2>1. General</h2><p>This website (greencam.uz) is the official website of the GreenCamUz project (No. 101234907), funded by the European Union under the Erasmus+ Capacity Building in Higher Education (CBHE) Strand 1 programme. By accessing this website, you agree to these Terms of Use.</p></div>
+        <div class="legal-section"><h2>2. Intellectual Property</h2><p>The content of this website, including text, images, logos, and documents, is owned by the GreenCamUz project consortium or is used with permission. Project results marked as "Public" may be freely accessed and used for non-commercial and non-competitive purposes. The GreenCamUz logo and project identity may not be used without prior written consent from the project coordinator.</p></div>
+        <div class="legal-section"><h2>3. EU Funding Acknowledgement</h2><p>Funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Education and Culture Executive Agency (EACEA). Neither the European Union nor the granting authority can be held responsible for them.</p></div>
+        <div class="legal-section"><h2>4. Accuracy of Information</h2><p>We strive to keep the information on this website accurate and up to date. However, we make no warranties or representations regarding the completeness, accuracy, or reliability of the content.</p></div>
+        <div class="legal-section"><h2>5. Third-Party Links</h2><p>This website may contain links to external websites of partner institutions and other organizations. We are not responsible for the content or privacy practices of these external websites.</p></div>
+        <div class="legal-section"><h2>6. Use Restrictions</h2><p>You may not: use this website for any unlawful purpose, attempt to gain unauthorized access to the website or its systems, reproduce or redistribute content from this website without proper attribution, or use the EU flag or Erasmus+ logo in violation of European Commission visual identity guidelines.</p></div>
+        <div class="legal-section"><h2>7. Limitation of Liability</h2><p>The GreenCamUz consortium, its partner institutions, and the European Union shall not be liable for any damages arising from the use of this website or reliance on its content.</p></div>
+        <div class="legal-section"><h2>8. Governing Law</h2><p>These Terms of Use are governed by the laws of the Republic of Uzbekistan and applicable European Union regulations, including the terms of Grant Agreement GAP-101234907.</p></div>
+        <div class="legal-section"><h2>9. Contact</h2><p>greencamuz@gmail.com<br>+998 90 927 14 00</p></div>
+{% endif %}
     </div>
 </section>
 {% endblock %}

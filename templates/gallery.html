@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Gallery - Green Campus Initiative{% endblock %}
+{% block title %}Galereya - GreenCamUz{% endblock %}
 
 {% block content %}
 <!-- Gallery Section -->
@@ -9,19 +10,11 @@
     <div class="section-content">
         <!-- Header -->
         <div class="gallery-header">
-            <span class="section-tag">Our Gallery</span>
-            <h1 class="section-title gallery-title">Moments That Inspire</h1>
+            <span class="section-tag">{% trans "Gallery" %}</span>
+            <h1 class="section-title gallery-title">{% trans "Moments that inspire" %}</h1>
             <p class="about-paragraph gallery-description">
-                Explore the journey of Green Campus Initiative through powerful visuals. From campus transformations to community achievements, every image tells a story of positive change.
+                {% trans "Explore the Green Campus Initiative journey through powerful visuals. From campus transformations to community achievements — every image tells a story of positive change." %}
             </p>
-        </div>
-
-        <!-- Filter Buttons -->
-        <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 40px; flex-wrap: wrap;">
-            <a href="?source=all" class="gallery-filter-btn {% if current_source == 'all' %}active{% endif %}">All</a>
-            <a href="?source=gallery" class="gallery-filter-btn {% if current_source == 'gallery' %}active{% endif %}">Gallery</a>
-            <a href="?source=news" class="gallery-filter-btn {% if current_source == 'news' %}active{% endif %}">News</a>
-            <a href="?source=events" class="gallery-filter-btn {% if current_source == 'events' %}active{% endif %}">Events</a>
         </div>
 
         <!-- Gallery Grid -->
@@ -31,17 +24,14 @@
             <div class="gallery-card" onclick="openLightbox({{ forloop.counter0 }})" style="cursor: pointer;">
                 <div class="gallery-image-container">
                     {% if item.media_type == 'video' %}
-                    <video src="/media/{{ item.file_url }}" class="gallery-image" preload="metadata"></video>
+                    <video src="{{ item.file.url }}" class="gallery-image" preload="metadata"></video>
                     <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:50px; height:50px; background:rgba(0,0,0,0.6); border-radius:50%; display:flex; align-items:center; justify-content:center; pointer-events:none;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                     </div>
                     {% else %}
-                    <img src="/media/{{ item.file_url }}" alt="{{ item.caption|default:'Gallery' }}" class="gallery-image">
+                    <img src="{{ item.file.url }}" alt="GreenCamUz" class="gallery-image">
                     {% endif %}
                 </div>
-                {% if item.caption %}
-                <div style="padding: 8px 12px; font-size: 13px; color: rgba(255,255,255,0.7);">{{ item.caption }}</div>
-                {% endif %}
             </div>
             {% endfor %}
         </div>
@@ -56,8 +46,8 @@
                 <circle cx="9" cy="9" r="2"/>
                 <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
             </svg>
-            <h3 class="gallery-empty-title">No Media Found</h3>
-            <p class="gallery-empty-text">No images or videos have been added yet.</p>
+            <h3 class="gallery-empty-title">{% trans "No media found" %}</h3>
+            <p class="gallery-empty-text">{% trans "No images or videos have been added yet." %}</p>
         </div>
         {% endif %}
     </div>
@@ -77,7 +67,7 @@
 <script>
 var mediaItems = [
     {% for item in gallery_items %}
-    { type: '{{ item.media_type }}', url: '/media/{{ item.file_url }}', caption: '{{ item.caption|default:""|escapejs }}' }{% if not forloop.last %},{% endif %}
+    { type: '{{ item.media_type }}', url: '{{ item.file.url }}', caption: '' }{% if not forloop.last %},{% endif %}
     {% endfor %}
 ];
 var currentIndex = 0;

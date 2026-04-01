@@ -1,122 +1,397 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}About - GreenCamUz{% endblock %}
+{% block title %}{% trans "Project" %} - GreenCamUz{% endblock %}
+
+{% block extra_css %}
+<style>
+.project-page {
+    padding-top: 140px;
+    padding-bottom: 80px;
+}
+
+.project-page .section-content {
+    max-width: 900px;
+}
+
+.project-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 48px;
+}
+
+.project-header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: #1a1a2e;
+    border-left: 4px solid #2e5b15;
+    padding-left: 20px;
+}
+
+.project-breadcrumb {
+    font-size: 14px;
+    color: rgba(26,26,46,0.5);
+}
+
+.project-breadcrumb a {
+    color: rgba(26,26,46,0.5);
+    text-decoration: none;
+}
+
+.project-breadcrumb a:hover {
+    color: #2e5b15;
+}
+
+.project-row {
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(46,91,21,0.1);
+}
+
+.project-row:first-child {
+    padding-top: 0;
+}
+
+.project-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #2e5b15;
+    margin-bottom: 8px;
+}
+
+.project-value {
+    font-size: 16px;
+    color: rgba(26,26,46,0.8);
+    line-height: 1.7;
+}
+
+.project-value strong {
+    color: #1a1a2e;
+}
+
+.project-logos {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.project-logos img {
+    max-height: 70px;
+    width: auto;
+}
+
+.project-partner-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: partner;
+}
+
+.project-partner-list li {
+    counter-increment: partner;
+    padding: 6px 0;
+    font-size: 16px;
+    color: rgba(26,26,46,0.8);
+    line-height: 1.6;
+}
+
+.project-partner-list li::before {
+    content: counter(partner) ". ";
+    font-weight: 700;
+    color: #2e5b15;
+}
+
+.project-partner-list li span {
+    color: rgba(26,26,46,0.5);
+}
+
+.project-sub-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #2e5b15;
+    margin-top: 24px;
+    margin-bottom: 12px;
+}
+
+.project-outcomes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.project-outcomes li {
+    padding: 4px 0;
+    font-size: 16px;
+    color: rgba(26,26,46,0.8);
+    line-height: 1.7;
+    padding-left: 20px;
+    position: relative;
+}
+
+.project-outcomes li::before {
+    content: "\25A0";
+    color: #2e5b15;
+    position: absolute;
+    left: 0;
+    font-size: 10px;
+    top: 8px;
+}
+
+@media (max-width: 768px) {
+    .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .project-header h1 {
+        font-size: 32px;
+    }
+
+    .project-logos img {
+        max-height: 50px;
+    }
+}
+</style>
+{% endblock %}
 
 {% block content %}
-<!-- About the Project Section (with image) -->
-<section class="about-section" id="about" style="padding-top: 140px;">
+{% get_current_language as LANG %}
+<section class="about-section project-page">
     <div class="section-content">
-        <div class="about-grid">
-            <div class="about-text">
-                <span class="section-tag">About GreenCamUz</span>
-                <h2 class="section-title">About the Project</h2>
 
-                <p class="about-paragraph"><strong>GreenCamUz — Green Campus Initiative: Integrating Sustainability into Higher Education in Uzbekistan</strong> — is an international project bringing together higher education institutions from Uzbekistan, Europe, and Türkiye to embed sustainability at the core of academic life.</p>
-
-                <p class="about-paragraph">Funded by the European Union under the Erasmus+ CBHE Strand 1 framework, GreenCamUz is the <strong>only project of its kind in Uzbekistan</strong> under this category. It is implemented in alignment with the United Nations Sustainable Development Goals (SDGs) and the priorities of the European Green Deal.</p>
-            </div>
-
-            <div class="about-visual">
-                <div class="image-card">
-                    <div class="image-placeholder">
-                        <div class="image-pattern"></div>
-                        <div class="image-icon-wrap">
-                            {% if about_images %}
-                            <div class="about-carousel">
-                                <div class="carousel-track">
-                                    {% for img in about_images %}
-                                    <div class="carousel-slide {% if forloop.first %}active{% endif %}">
-                                        <img src="{{ img.image.url }}" alt="{{ img.caption|default:'GreenCamUz' }}" class="action-image">
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                                {% if about_images|length > 1 %}
-                                <button class="carousel-btn carousel-prev" onclick="carouselNav(-1)">&#10094;</button>
-                                <button class="carousel-btn carousel-next" onclick="carouselNav(1)">&#10095;</button>
-                                <div class="carousel-dots">
-                                    {% for img in about_images %}
-                                    <span class="carousel-dot {% if forloop.first %}active{% endif %}" onclick="carouselGo({{ forloop.counter0 }})"></span>
-                                    {% endfor %}
-                                </div>
-                                {% endif %}
-                            </div>
-                            {% else %}
-                            <div class="media-placeholder" style="min-height: 300px;"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 17 3.5s1.5 5 .8 10.5A7 7 0 0 1 11 20"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg><span>GreenCam</span></div>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
+        <div class="project-header">
+            <h1>{% trans "Project" %}</h1>
+            <div class="project-breadcrumb">
+                <a href="{% url 'core:home' %}">{% trans "Home" %}</a> / {% trans "Project" %}
             </div>
         </div>
+
+        {% if LANG == 'uz' %}
+
+        <div class="project-row">
+            <div class="project-label">Loyiha nomi:</div>
+            <div class="project-value">Yashil kampus tashabbusi: O'zbekistonda oliy ta'limga barqarorlikni integratsiya qilish</div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Loyiha logotipi:</div>
+            <div class="project-logos">
+                <img src="{% static 'img/logo2.png' %}" alt="GreenCamUz Logo">
+                <img src="{% static 'img/logo.png' %}" alt="GreenCamUz Logo">
+            </div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Qisqartmasi:</div>
+            <div class="project-value">GreenCamUz</div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Loyiha maqsadi:</div>
+            <div class="project-value">Loyiha kelajakka yo'naltirilgan strategiyalar yordamida barqarorlikni turli ta'lim dasturlariga integratsiya qilishni maqsad qiladi. U BMTning Barqaror Rivojlanish Maqsadlari va Yevropa Ittifoqining ta'limda ekologik barqarorlik bo'yicha majburiyatlariga muvofiq amalga oshirilmoqda. Tashabbuskor talabalar va o'quvchilarni iqlim o'zgarishi va ekologik muammolarga qarshi kurashish ko'nikmalariga ega qiladi, shu bilan birga ekologik muammolar va inson faoliyati o'rtasidagi bog'liqlik to'g'risida xabardorlikni oshiradi, ularni mas'uliyatli global fuqarolar bo'lishga tayyorlaydi.</div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Loyihadan kutilayotgan natijalar:</div>
+            <ul class="project-outcomes">
+                <li>O'zbekistondagi 6 ta universitet uchun yashil kampus strategiyalari</li>
+                <li>Turli fanlar bo'yicha 12 ta barqarorlikka yo'naltirilgan yangi kurslar</li>
+                <li>Yevropa hamkorlari tomonidan professor-o'qituvchilar salohiyatini oshirish uchun 3 ta maxsus trening kurslari</li>
+                <li>48 ta professor-o'qituvchi va 24 ta ma'muriy xodim maxsus dasturlar orqali o'qitilgan</li>
+                <li>120 ta tayyorlangan yashil kampus elchilari (talabalar va xodimlar) tarmog'i</li>
+                <li>Har bir O'zbekiston hamkorida bittadan 6 ta pilot loyiha</li>
+                <li>200+ ishtirokchili yillik Green Campus konferensiyasi</li>
+                <li>1,000+ foydalanuvchini jalb qiluvchi bilim almashish virtual platformasi</li>
+                <li>12+ mahalliy biznes va jamoat tashkilotlari bilan hamkorlik</li>
+            </ul>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Loyiha koordinatori:</div>
+            <div class="project-value"><strong>Qo'qon Universiteti (KU)</strong> <span>(Qo'qon, O'zbekiston)</span><br>Koordinator: Ulugbek Mamadaliev</div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-sub-label">Yevropalik hamkorlar:</div>
+            <ol class="project-partner-list">
+                <li><strong>Politechnika Opolska</strong> <span>(Opole, Polsha)</span></li>
+                <li><strong>Vilniaus Gedimino Technikos Universitetas</strong> <span>(Vilnyus, Litva)</span></li>
+                <li><strong>Karab&uuml;k University</strong> <span>(Karab&uuml;k, Turkiya)</span></li>
+            </ol>
+        </div>
+
+        <div class="project-row">
+            <div class="project-sub-label">O'zbekistonlik hamkorlar:</div>
+            <ol class="project-partner-list">
+                <li><strong>Tashkent International University</strong> <span>(Toshkent, O'zbekiston)</span></li>
+                <li><strong>Markaziy Osiyo Atrof-muhit va Iqlim o'zgarishi tadqiqotlari universiteti (Green University)</strong> <span>(Toshkent, O'zbekiston)</span></li>
+                <li><strong>Alfraganus University</strong> <span>(Toshkent, O'zbekiston)</span></li>
+                <li><strong>Andijon davlat texnika instituti</strong> <span>(Andijon, O'zbekiston)</span></li>
+                <li><strong>Biznes va Tadbirkorlik Oliy Maktabi</strong> <span>(Toshkent, O'zbekiston)</span></li>
+            </ol>
+        </div>
+
+        <div class="project-row">
+            <div class="project-sub-label">Assotsiatsiyalashgan hamkorlar:</div>
+            <ol class="project-partner-list">
+                <li><strong>O'zbekiston Respublikasi Ekologiya, Atrof-muhit muhofazasi va Iqlim o'zgarishi vazirligi</strong> <span>(Toshkent, O'zbekiston)</span></li>
+                <li><strong>O'zbekiston Respublikasi Oliy ta'lim, Fan va Innovatsiyalar vazirligi</strong> <span>(Toshkent, O'zbekiston)</span></li>
+                <li><strong>Toshkent Davlat Sharqshunoslik Universiteti</strong> <span>(Toshkent, O'zbekiston)</span></li>
+            </ol>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Loyiha davomiyligi:</div>
+            <div class="project-value">36 oy (2025–2028)</div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Loyiha tili:</div>
+            <div class="project-value">Ingliz tili</div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Faoliyat yo'nalishi:</div>
+            <div class="project-value">O'quv dasturlarni ishlab chiqish</div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Faoliyat turi:</div>
+            <div class="project-value">ERASMUS Lump Sum Grants (CBHE Strand 1)</div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Grant beruvchi organ:</div>
+            <div class="project-value">Yevropa Ta'lim va Madaniyat Ijro Agentligi (EACEA)</div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Byudjet:</div>
+            <div class="project-value">&euro;359,682.44</div>
+        </div>
+
+        <div class="project-row" style="border-bottom: none;">
+            <div class="project-label">Loyiha raqami:</div>
+            <div class="project-value">101234907</div>
+        </div>
+
+        {% else %}
+
+        <div class="project-row">
+            <div class="project-label">Name of the project:</div>
+            <div class="project-value">Green Campus Initiative: Integrating Sustainability into Higher Education in Uzbekistan</div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Logo of the project:</div>
+            <div class="project-logos">
+                <img src="{% static 'img/logo2.png' %}" alt="GreenCamUz Logo">
+                <img src="{% static 'img/logo.png' %}" alt="GreenCamUz Logo">
+            </div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Acronym:</div>
+            <div class="project-value">GreenCamUz</div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Aim of the project:</div>
+            <div class="project-value">The project aims to integrate sustainability into various educational curricula using future-oriented strategies for competence development by project partners. It aligns with the United Nations Sustainable Development Goals and the European Union's commitment to environmental sustainability in education. The initiative will equip students and learners with skills to tackle climate change and ecological challenges while promoting awareness of the links between environmental issues and human activities, preparing them to be responsible global citizens. This effort also supports Uzbekistan's national sustainable development goals.</div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Main project outcomes:</div>
+            <ul class="project-outcomes">
+                <li>Green campus strategies for 6 universities in Uzbekistan</li>
+                <li>12 new sustainability-focused courses across various disciplines</li>
+                <li>3 specialized training courses by EU partners for faculty capacity building</li>
+                <li>48 faculty members and 24 administrative staff trained through specialized programs</li>
+                <li>Network of 120 trained Green Campus Ambassadors (students and staff)</li>
+                <li>6 pilot projects, one at each UZ partner, demonstrating sustainable practices</li>
+                <li>Annual Green Campus Conference with 200+ participants</li>
+                <li>Virtual platform for knowledge sharing engaging 1,000+ users</li>
+                <li>Partnerships with 12+ local businesses and community organizations</li>
+            </ul>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Project coordinator:</div>
+            <div class="project-value"><strong>Kokand University (KU)</strong> <span>(Kokand, Uzbekistan)</span><br>Coordinator: Ulugbek Mamadaliev</div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-sub-label">European Partners:</div>
+            <ol class="project-partner-list">
+                <li><strong>Opole University of Technology</strong> <span>(Opole, Poland)</span></li>
+                <li><strong>Vilnius Gediminas Technical University</strong> <span>(Vilnius, Lithuania)</span></li>
+                <li><strong>Karab&uuml;k University</strong> <span>(Karab&uuml;k, T&uuml;rkiye)</span></li>
+            </ol>
+        </div>
+
+        <div class="project-row">
+            <div class="project-sub-label">Partners from Uzbekistan:</div>
+            <ol class="project-partner-list">
+                <li><strong>Tashkent International University</strong> <span>(Tashkent, Uzbekistan)</span></li>
+                <li><strong>Central Asian University of Environmental and Climate Change Studies (Green University)</strong> <span>(Tashkent, Uzbekistan)</span></li>
+                <li><strong>Alfraganus University</strong> <span>(Tashkent, Uzbekistan)</span></li>
+                <li><strong>Andijan State Technical Institute</strong> <span>(Andijan, Uzbekistan)</span></li>
+                <li><strong>Graduate School of Business and Entrepreneurship</strong> <span>(Tashkent, Uzbekistan)</span></li>
+            </ol>
+        </div>
+
+        <div class="project-row">
+            <div class="project-sub-label">Associated Partners:</div>
+            <ol class="project-partner-list">
+                <li><strong>Ministry of Ecology, Environmental Protection and Climate Change of the Republic of Uzbekistan</strong> <span>(Tashkent, Uzbekistan)</span></li>
+                <li><strong>Ministry of Higher Education, Science and Innovation of the Republic of Uzbekistan</strong> <span>(Tashkent, Uzbekistan)</span></li>
+                <li><strong>Tashkent State University of Oriental Studies</strong> <span>(Tashkent, Uzbekistan)</span></li>
+            </ol>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Duration of the project:</div>
+            <div class="project-value">36 months (2025–2028)</div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Project language:</div>
+            <div class="project-value">English</div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Action specific activities:</div>
+            <div class="project-value">Curriculum Development</div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Type of action:</div>
+            <div class="project-value">ERASMUS Lump Sum Grants (CBHE Strand 1)</div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Granting authority:</div>
+            <div class="project-value">European Education and Culture Executive Agency (EACEA)</div>
+        </div>
+
+        <div class="project-row">
+            <div class="project-label">Budget:</div>
+            <div class="project-value">&euro;359,682.44</div>
+        </div>
+
+        <div class="project-row" style="border-bottom: none;">
+            <div class="project-label">Project number:</div>
+            <div class="project-value">101234907</div>
+        </div>
+
+        {% endif %}
+
     </div>
 </section>
-
-<!-- What We Do Section -->
-<section class="about-section">
-    <div class="section-content">
-        <span class="section-tag">Our Mission</span>
-        <h2 class="section-title">What We Do</h2>
-
-        <p class="about-paragraph">GreenCamUz focuses on three interconnected pillars: modernizing curricula to reflect sustainability principles, building the capacity of academic and administrative staff through targeted green technology training, and launching hands-on pilot initiatives across partner campuses.</p>
-
-        <p class="about-paragraph">Over the course of the project (2025–2028), key outcomes include updated sustainability-oriented curricula across 12 academic disciplines, green technology training for 48 academic and 24 administrative staff members, a Green Campus Ambassadors network of 120 participants, six campus-level pilot projects, an Annual Green Campus Conference with over 200 participants, a virtual knowledge platform serving more than 1,000 users, and active cooperation with over 12 local businesses and non-governmental organizations.</p>
-    </div>
-</section>
-
-<!-- Our Partners Section -->
-<section class="about-section">
-    <div class="section-content">
-        <span class="section-tag">Consortium</span>
-        <h2 class="section-title">Our Partners</h2>
-
-        <p class="about-paragraph">The project unites nine higher education institutions across three regions:</p>
-
-        <ul style="list-style: none; padding-left: 0; margin-bottom: 16px; color: #4a4a4a; line-height: 2; font-size: 16px;">
-            <li>🇺🇿 <strong>Uzbekistan:</strong> Kokand University, Kokand University Andijan Branch, Tashkent International University, Republican Higher School of Business and Entrepreneurship, Central Asian Green University, Andijan State Technical Institute</li>
-            <li>🇪🇺 <strong>Europe:</strong> University of Opole (Poland), Vilnius Tech University (Lithuania)</li>
-            <li>🇹🇷 <strong>Türkiye:</strong> Karabuk University</li>
-        </ul>
-    </div>
-</section>
-
-<!-- Our Vision Section -->
-<section class="about-section" style="padding-bottom: 80px;">
-    <div class="section-content">
-        <span class="section-tag">Looking Ahead</span>
-        <h2 class="section-title">Our Vision</h2>
-
-        <p class="about-paragraph">GreenCamUz is more than a project — it is a long-term commitment to transforming how universities in Uzbekistan think, teach, and operate. By connecting local institutions with European and Turkish partners, we aim to build a generation of graduates and professionals equipped to lead sustainable development in Central Asia and beyond.</p>
-    </div>
-</section>
-
-{% if about_images|length > 1 %}
-<script>
-var currentSlide = 0;
-var slides = document.querySelectorAll('.carousel-slide');
-var dots = document.querySelectorAll('.carousel-dot');
-var totalSlides = slides.length;
-var autoTimer;
-
-function carouselGo(index) {
-    slides[currentSlide].classList.remove('active');
-    dots[currentSlide].classList.remove('active');
-    currentSlide = (index + totalSlides) % totalSlides;
-    slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
-    resetAutoPlay();
-}
-
-function carouselNav(dir) {
-    carouselGo(currentSlide + dir);
-}
-
-function resetAutoPlay() {
-    clearInterval(autoTimer);
-    autoTimer = setInterval(function() { carouselNav(1); }, 4000);
-}
-
-resetAutoPlay();
-</script>
-{% endif %}
 {% endblock %}

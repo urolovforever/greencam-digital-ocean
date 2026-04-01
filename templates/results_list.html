@@ -1,0 +1,420 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Results" %} - GreenCamUz{% endblock %}
+
+{% block extra_css %}
+<style>
+.results-page { padding-top: 140px; padding-bottom: 80px; }
+.results-page .section-content { max-width: 900px; }
+.results-page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 48px; }
+.results-page-header h1 { font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #2e5b15; padding-left: 20px; }
+.results-breadcrumb { font-size: 14px; color: rgba(26,26,46,0.5); }
+.results-breadcrumb a { color: rgba(26,26,46,0.5); text-decoration: none; }
+.results-breadcrumb a:hover { color: #2e5b15; }
+.result-accordion { margin-bottom: 12px; }
+.result-accordion-header { display: flex; align-items: center; justify-content: space-between; padding: 22px 28px; background: rgba(46,91,21,0.04); border: 1px solid rgba(46,91,21,0.08); border-radius: 16px; cursor: pointer; transition: all 0.3s ease; user-select: none; }
+.result-accordion-header:hover { background: rgba(46,91,21,0.08); border-color: rgba(46,91,21,0.15); }
+.result-accordion.active .result-accordion-header { border-color: rgba(46,91,21,0.3); border-radius: 16px 16px 0 0; background: rgba(46,91,21,0.06); box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
+.result-accordion-title { font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 600; color: #1a1a2e; transition: color 0.3s; }
+.result-accordion.active .result-accordion-title { color: #2e5b15; font-weight: 700; }
+.result-accordion-arrow { width: 22px; height: 22px; flex-shrink: 0; transition: transform 0.3s ease; color: rgba(26,26,46,0.4); }
+.result-accordion.active .result-accordion-arrow { transform: rotate(180deg); color: #2e5b15; }
+.result-accordion-body { display: none; padding: 24px 28px; border: 1px solid rgba(46,91,21,0.08); border-top: none; border-radius: 0 0 16px 16px; background: #fff; }
+.result-accordion.active .result-accordion-body { display: block; }
+.result-sub-title { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 700; color: #1a1a2e; margin-top: 20px; margin-bottom: 10px; }
+.result-sub-title:first-child { margin-top: 0; }
+.result-item { padding: 6px 0 6px 22px; font-size: 15px; color: rgba(26,26,46,0.7); line-height: 1.6; position: relative; }
+.result-item::before { content: ''; position: absolute; left: 6px; top: 14px; width: 6px; height: 6px; background: rgba(46,91,21,0.3); border-radius: 50%; }
+@media (max-width: 768px) {
+    .results-page-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .results-page-header h1 { font-size: 32px; }
+    .result-accordion-header { padding: 16px 20px; }
+    .result-accordion-title { font-size: 15px; }
+    .result-accordion-body { padding: 18px 20px; }
+    .result-item { font-size: 14px; padding-left: 18px; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+{% get_current_language as LANG %}
+<section class="about-section results-page">
+    <div class="section-content">
+
+        <div class="results-page-header">
+            <h1>{% trans "Results" %}</h1>
+            <div class="results-breadcrumb">
+                <a href="{% url 'core:home' %}">{% trans "Home" %}</a> / {% trans "Results" %}
+            </div>
+        </div>
+
+        {% if has_dynamic %}
+        {% for cat in categories %}
+        <div class="result-accordion">
+            <div class="result-accordion-header" onclick="toggleResult(this)">
+                <span class="result-accordion-title">{{ cat.translated_name }}</span>
+                <svg class="result-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="result-accordion-body">
+                {% regroup cat.files.all by subcategory as sub_groups %}
+                {% for group in sub_groups %}
+                <div class="result-sub-title">{{ group.grouper.translated_name }}:</div>
+                {% for f in group.list %}
+                <div class="result-item">
+                    <a href="{{ f.file.url }}" download style="color: #2e5b15; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        {{ f.translated_name }}
+                    </a>
+                </div>
+                {% endfor %}
+                {% empty %}
+                <div class="result-item" style="color: rgba(26,26,46,0.4); font-style: italic;">{% if LANG == 'uz' %}Hali fayllar yuklanmagan{% else %}No files uploaded yet{% endif %}</div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+
+        {% elif LANG == 'uz' %}
+
+        <!-- WP1 UZ -->
+        <div class="result-accordion">
+            <div class="result-accordion-header" onclick="toggleResult(this)">
+                <span class="result-accordion-title">Ish paketi 1: Loyiha boshqaruvi va sifat nazorati</span>
+                <svg class="result-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="result-accordion-body">
+                <div class="result-sub-title">Natijalar:</div>
+                <div class="result-item">GreenCamUz_D1.1_Loyiha boshqaruvi qo'llanmasi</div>
+                <div class="result-item">GreenCamUz_D1.2_Sifat nazorati rejasi</div>
+                <div class="result-item">GreenCamUz_D1.3_Taraqqiyot hisoboti</div>
+                <div class="result-item">GreenCamUz_D1.4_O'rta muddatli sifat nazorati hisoboti</div>
+                <div class="result-item">GreenCamUz_D1.5_Yakuniy sifat nazorati hisoboti</div>
+                <div class="result-sub-title">Natijalar/Yutuqlar:</div>
+                <div class="result-item">Loyiha boshqaruv tuzilmalari yaratildi</div>
+                <div class="result-item">Boshlang'ich uchrashuv o'tkazildi</div>
+                <div class="result-item">Tashqi ekspert jalb qilindi (2 ta hisobot)</div>
+                <div class="result-item">Barcha hamkorlar tomonidan hamkorlik shartnomasi imzolandi</div>
+                <div class="result-item">5 ta yuzma-yuz, 2 ta onlayn uchrashuv o'tkazildi</div>
+                <div class="result-sub-title">Xizmat/Mahsulot:</div>
+                <div class="result-item">Loyiha veb-sayti: www.greencam.uz</div>
+                <div class="result-item">Ijtimoiy tarmoq kanallari (o'zbek va ingliz tillarida)</div>
+            </div>
+        </div>
+
+        <!-- WP2 UZ -->
+        <div class="result-accordion">
+            <div class="result-accordion-header" onclick="toggleResult(this)">
+                <span class="result-accordion-title">Ish paketi 2: Yashil kampus strategiyasini ishlab chiqish</span>
+                <svg class="result-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="result-accordion-body">
+                <div class="result-sub-title">Natijalar:</div>
+                <div class="result-item">GreenCamUz_D2.1_Yashil kampus strategiyalari</div>
+                <div class="result-sub-title">Natijalar/Yutuqlar:</div>
+                <div class="result-item">Strategiyaning birinchi loyihasi manfaatdor tomonlar bilan ko'rib chiqildi</div>
+                <div class="result-item">Yashil kampus strategiyalari yakunlandi va Vazirlik tomonidan tasdiqlandi</div>
+                <div class="result-item">6 ta O'zbekiston universiteti uchun amalga oshirish yo'l xaritalari yaratildi</div>
+                <div class="result-item">Barqarorlik ko'rsatkichlari bilan monitoring va baholash tizimi yaratildi</div>
+                <div class="result-sub-title">Xizmat/Mahsulot:</div>
+                <div class="result-item">Keng qamrovli yashil kampus strategiyalari hujjati (160 bet, PDF, o'zbek va ingliz tillarida)</div>
+            </div>
+        </div>
+
+        <!-- WP3 UZ -->
+        <div class="result-accordion">
+            <div class="result-accordion-header" onclick="toggleResult(this)">
+                <span class="result-accordion-title">Ish paketi 3: O'quv dasturlarni ishlab chiqish va integratsiya</span>
+                <svg class="result-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="result-accordion-body">
+                <div class="result-sub-title">Natijalar:</div>
+                <div class="result-item">GreenCamUz_D3.1_12 ta barqarorlikka yo'naltirilgan kurslar</div>
+                <div class="result-item">GreenCamUz_D3.2_Yangilangan dasturlar</div>
+                <div class="result-sub-title">Natijalar/Yutuqlar:</div>
+                <div class="result-item">12 ta barqarorlik kurslari ishlab chiqildi va integratsiya qilindi</div>
+                <div class="result-item">Kurslar o'qituvchilar, mutaxassislar va talabalar tomonidan sinovdan o'tkazildi</div>
+                <div class="result-item">O'quv materiallari va resurslar yaratildi (Ma'ruzalar, 120 bet)</div>
+                <div class="result-item">Har yili 375 talaba yangi kurslarda qatnashadi</div>
+                <div class="result-sub-title">Xizmat/Mahsulot:</div>
+                <div class="result-item">ECTS kreditlari va o'quv natijalari bilan 12 ta kurs dasturi</div>
+                <div class="result-item">Yangilangan bakalavr dasturlari hujjatlari</div>
+            </div>
+        </div>
+
+        <!-- WP4 UZ -->
+        <div class="result-accordion">
+            <div class="result-accordion-header" onclick="toggleResult(this)">
+                <span class="result-accordion-title">Ish paketi 4: Salohiyat oshirish va trening</span>
+                <svg class="result-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="result-accordion-body">
+                <div class="result-sub-title">Natijalar:</div>
+                <div class="result-item">GreenCamUz_D4.1_3 ta trening kurslari va trening tadbirlari</div>
+                <div class="result-item">GreenCamUz_D4.2_Green Campus Ambassador dasturi va sessiyalari</div>
+                <div class="result-sub-title">Natijalar/Yutuqlar:</div>
+                <div class="result-item">Yevropa hamkorlari tomonidan 3 ta trening kursi ishlab chiqildi (OUTech, KBU, GSBE)</div>
+                <div class="result-item">48 ta professor-o'qituvchi o'qitildi</div>
+                <div class="result-item">24 ta ma'muriy xodim o'qitildi</div>
+                <div class="result-item">120 ta Green Campus elchisi tayyorlandi (60 xodim + 60 talaba)</div>
+                <div class="result-item">Har bir O'zbekiston hamkorida 6 ta elchilar seminari o'tkazildi</div>
+                <div class="result-sub-title">Xizmat/Mahsulot:</div>
+                <div class="result-item">Trening taqdimotlari loyiha veb-saytiga yuklandi</div>
+                <div class="result-item">Green Campus Ambassador dasturi o'quv materiallari</div>
+            </div>
+        </div>
+
+        <!-- WP5 UZ -->
+        <div class="result-accordion">
+            <div class="result-accordion-header" onclick="toggleResult(this)">
+                <span class="result-accordion-title">Ish paketi 5: Barqaror infratuzilmani joriy etish</span>
+                <svg class="result-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="result-accordion-body">
+                <div class="result-sub-title">Natijalar:</div>
+                <div class="result-item">GreenCamUz_D5.1_6 ta pilot loyiha amalga oshirilishi</div>
+                <div class="result-item">GreenCamUz_D5.2_Eng yaxshi amaliyotlar hujjatlari</div>
+                <div class="result-sub-title">Natijalar/Yutuqlar:</div>
+                <div class="result-item">6 ta pilot loyiha amalga oshirildi:</div>
+                <div class="result-item" style="padding-left: 40px;">KU — Yashil kampus eko-park</div>
+                <div class="result-item" style="padding-left: 40px;">TIU — Aqlli chiqindilarni boshqarish tizimi</div>
+                <div class="result-item" style="padding-left: 40px;">CAGU — Quyosh energiyali kampus yoritgichlari</div>
+                <div class="result-item" style="padding-left: 40px;">AFU — Kampus suvni tejash tizimi</div>
+                <div class="result-item" style="padding-left: 40px;">ASTI — Yashil daraxtlar ma'lumotlar bazasi</div>
+                <div class="result-item" style="padding-left: 40px;">GSBE — Havo sifatini monitoring qilish</div>
+                <div class="result-sub-title">Xizmat/Mahsulot:</div>
+                <div class="result-item">Amalga oshirish hisoboti (PDF, ingliz va o'zbek tillarida)</div>
+                <div class="result-item">Eng yaxshi amaliyotlar hujjatlari (120 bet, PDF, ingliz va o'zbek tillarida)</div>
+            </div>
+        </div>
+
+        <!-- WP6 UZ -->
+        <div class="result-accordion">
+            <div class="result-accordion-header" onclick="toggleResult(this)">
+                <span class="result-accordion-title">Ish paketi 6: Jamoatchilik ishtiroki va tarmoqlashtirish</span>
+                <svg class="result-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="result-accordion-body">
+                <div class="result-sub-title">Natijalar:</div>
+                <div class="result-item">GreenCamUz_D6.1_1000 foydalanuvchili virtual platforma</div>
+                <div class="result-item">GreenCamUz_D6.2_Biznes va jamoat hamkorliklarini o'rnatish</div>
+                <div class="result-item">GreenCamUz_D6.3_Green Campus konferensiyasi (1-yil)</div>
+                <div class="result-item">GreenCamUz_D6.4_Green Campus konferensiyasi (2-yil)</div>
+                <div class="result-item">GreenCamUz_D6.5_Green Campus konferensiyasi (3-yil)</div>
+                <div class="result-sub-title">Natijalar/Yutuqlar:</div>
+                <div class="result-item">12+ biznes va jamoat hamkorlik shartnomalar imzolandi</div>
+                <div class="result-item">Yillik Green Campus konferensiyasi o'tkazildi (har birida 200+ ishtirokchi)</div>
+                <div class="result-item">Virtual platformada 1000+ foydalanuvchi jalb etildi</div>
+                <div class="result-sub-title">Xizmat/Mahsulot:</div>
+                <div class="result-item">Virtual bilim almashish platformasi</div>
+                <div class="result-item">Konferensiya kitobi (har yil uchun)</div>
+                <div class="result-item">Konferensiya dasturi, reklama materiallari, fotolavhalar</div>
+            </div>
+        </div>
+
+        <!-- WP7 UZ -->
+        <div class="result-accordion">
+            <div class="result-accordion-header" onclick="toggleResult(this)">
+                <span class="result-accordion-title">Ish paketi 7: Ta'sir va tarqatish</span>
+                <svg class="result-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="result-accordion-body">
+                <div class="result-sub-title">Natijalar:</div>
+                <div class="result-item">GreenCamUz_D7.1_Tarqatish strategiyasi</div>
+                <div class="result-item">GreenCamUz_D7.2_Barqarorlik va foydalanish rejasi</div>
+                <div class="result-item">GreenCamUz_D7.3_Loyiha veb-sayti</div>
+                <div class="result-item">GreenCamUz_D7.4_O'rta muddatli tarqatish va foydalanish hisoboti</div>
+                <div class="result-item">GreenCamUz_D7.5_Yakuniy tarqatish va foydalanish hisoboti</div>
+                <div class="result-sub-title">Natijalar/Yutuqlar:</div>
+                <div class="result-item">Loyiha veb-sayti ishga tushirildi (greencam.uz) o'zbek va ingliz tillarida</div>
+                <div class="result-item">Tarqatish strategiyasi barcha kanallarda amalga oshirildi</div>
+                <div class="result-item">Moliyalashtirish tugagandan keyin davom ettirish rejasi</div>
+                <div class="result-sub-title">Xizmat/Mahsulot:</div>
+                <div class="result-item">Loyiha veb-sayti: www.greencam.uz</div>
+                <div class="result-item">Ijtimoiy tarmoqlarda o'zbek va ingliz tillarida ishtirok</div>
+                <div class="result-item">Reklama materiallari</div>
+                <div class="result-item">Muvaffaqiyat tarixi va eng yaxshi amaliyotlar nashrlari</div>
+            </div>
+        </div>
+
+        {% else %}
+
+        <!-- WP1 EN -->
+        <div class="result-accordion">
+            <div class="result-accordion-header" onclick="toggleResult(this)">
+                <span class="result-accordion-title">Work Package 1: Project Management and Quality Assurance</span>
+                <svg class="result-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="result-accordion-body">
+                <div class="result-sub-title">Deliverables:</div>
+                <div class="result-item">GreenCamUz_D1.1_Project management handbook</div>
+                <div class="result-item">GreenCamUz_D1.2_Quality assurance plan</div>
+                <div class="result-item">GreenCamUz_D1.3_Progress Report</div>
+                <div class="result-item">GreenCamUz_D1.4_Mid-term quality assurance report (internal and external)</div>
+                <div class="result-item">GreenCamUz_D1.5_Final quality assurance report (internal and external)</div>
+                <div class="result-sub-title">Results/Outcomes:</div>
+                <div class="result-item">Project management structures established</div>
+                <div class="result-item">Kick-off meeting completed</div>
+                <div class="result-item">External Expert recruited (2 reports: mid-term and final)</div>
+                <div class="result-item">Partnership Agreement signed by all partners</div>
+                <div class="result-item">5 face-to-face meetings, 2 online meetings completed</div>
+                <div class="result-sub-title">Service/Product:</div>
+                <div class="result-item">Project web-site: www.greencam.uz</div>
+                <div class="result-item">Social media channels (Uzbek and English)</div>
+            </div>
+        </div>
+
+        <!-- WP2 EN -->
+        <div class="result-accordion">
+            <div class="result-accordion-header" onclick="toggleResult(this)">
+                <span class="result-accordion-title">Work Package 2: Green Campus Strategy Development</span>
+                <svg class="result-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="result-accordion-body">
+                <div class="result-sub-title">Deliverables:</div>
+                <div class="result-item">GreenCamUz_D2.1_Green campus strategies</div>
+                <div class="result-sub-title">Results/Outcomes:</div>
+                <div class="result-item">First draft of strategy reviewed with stakeholders for feedback</div>
+                <div class="result-item">Green campus strategies finalized and approved by Ministry</div>
+                <div class="result-item">Implementation roadmaps created for 6 UZ universities</div>
+                <div class="result-item">Monitoring and evaluation framework established with sustainability indicators</div>
+                <div class="result-sub-title">Service/Product:</div>
+                <div class="result-item">Comprehensive green campus strategies document (160 pp., PDF, Uzbek and English)</div>
+            </div>
+        </div>
+
+        <!-- WP3 EN -->
+        <div class="result-accordion">
+            <div class="result-accordion-header" onclick="toggleResult(this)">
+                <span class="result-accordion-title">Work Package 3: Curriculum Development and Integration</span>
+                <svg class="result-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="result-accordion-body">
+                <div class="result-sub-title">Deliverables:</div>
+                <div class="result-item">GreenCamUz_D3.1_12 sustainability focused courses</div>
+                <div class="result-item">GreenCamUz_D3.2_Updated programs</div>
+                <div class="result-sub-title">Results/Outcomes:</div>
+                <div class="result-item">12 sustainability courses developed and integrated</div>
+                <div class="result-item">Courses tested by instructors, professionals, and students (two waves of pilot testing)</div>
+                <div class="result-item">Teaching materials and resources created (Lectures, 120 pp.)</div>
+                <div class="result-item">375 students participating in new courses per year</div>
+                <div class="result-sub-title">Service/Product:</div>
+                <div class="result-item">12 course syllabi with ECTS credits and learning outcomes</div>
+                <div class="result-item">Updated bachelor programs documentation</div>
+            </div>
+        </div>
+
+        <!-- WP4 EN -->
+        <div class="result-accordion">
+            <div class="result-accordion-header" onclick="toggleResult(this)">
+                <span class="result-accordion-title">Work Package 4: Capacity Building and Training</span>
+                <svg class="result-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="result-accordion-body">
+                <div class="result-sub-title">Deliverables:</div>
+                <div class="result-item">GreenCamUz_D4.1_3 training courses and training events</div>
+                <div class="result-item">GreenCamUz_D4.2_Green Campus Ambassador Program and sessions</div>
+                <div class="result-sub-title">Results/Outcomes:</div>
+                <div class="result-item">3 training courses developed by EU partners (OUTech, KBU, GSBE)</div>
+                <div class="result-item">48 faculty members trained</div>
+                <div class="result-item">24 administrative staff trained</div>
+                <div class="result-item">120 Green Campus Ambassadors trained (60 staff + 60 students)</div>
+                <div class="result-item">6 ambassador workshops held at each UZ partner</div>
+                <div class="result-sub-title">Service/Product:</div>
+                <div class="result-item">Training presentations uploaded to project website</div>
+                <div class="result-item">Green Campus Ambassador Program teaching materials</div>
+            </div>
+        </div>
+
+        <!-- WP5 EN -->
+        <div class="result-accordion">
+            <div class="result-accordion-header" onclick="toggleResult(this)">
+                <span class="result-accordion-title">Work Package 5: Sustainable Infrastructure Implementation</span>
+                <svg class="result-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="result-accordion-body">
+                <div class="result-sub-title">Deliverables:</div>
+                <div class="result-item">GreenCamUz_D5.1_6 pilot project implementations</div>
+                <div class="result-item">GreenCamUz_D5.2_Best practices documentation</div>
+                <div class="result-sub-title">Results/Outcomes:</div>
+                <div class="result-item">6 pilot projects implemented and results shared:</div>
+                <div class="result-item" style="padding-left: 40px;">KU — Green Campus Eco-Park</div>
+                <div class="result-item" style="padding-left: 40px;">TIU — Smart Waste Management System</div>
+                <div class="result-item" style="padding-left: 40px;">CAGU — Solar-Powered Campus Lighting</div>
+                <div class="result-item" style="padding-left: 40px;">AFU — Campus Water Conservation System</div>
+                <div class="result-item" style="padding-left: 40px;">ASTI — Green Trees Database</div>
+                <div class="result-item" style="padding-left: 40px;">GSBE — Air Quality Monitoring</div>
+                <div class="result-sub-title">Service/Product:</div>
+                <div class="result-item">Implementation report (PDF, English and Uzbek)</div>
+                <div class="result-item">Best practices documentation (120 pp., PDF, English and Uzbek)</div>
+            </div>
+        </div>
+
+        <!-- WP6 EN -->
+        <div class="result-accordion">
+            <div class="result-accordion-header" onclick="toggleResult(this)">
+                <span class="result-accordion-title">Work Package 6: Community Engagement and Networking</span>
+                <svg class="result-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="result-accordion-body">
+                <div class="result-sub-title">Deliverables:</div>
+                <div class="result-item">GreenCamUz_D6.1_Virtual platform with 1000 users</div>
+                <div class="result-item">GreenCamUz_D6.2_Establishment of business and community partnerships</div>
+                <div class="result-item">GreenCamUz_D6.3_Green Campus Conference (year 1)</div>
+                <div class="result-item">GreenCamUz_D6.4_Green Campus Conference (year 2)</div>
+                <div class="result-item">GreenCamUz_D6.5_Green Campus Conference (year 3)</div>
+                <div class="result-sub-title">Results/Outcomes:</div>
+                <div class="result-item">12+ business and community partnership agreements signed</div>
+                <div class="result-item">Annual Green Campus Conference held (200+ participants each)</div>
+                <div class="result-item">1000+ users engaged on virtual platform</div>
+                <div class="result-sub-title">Service/Product:</div>
+                <div class="result-item">Virtual knowledge-sharing platform: discussion forums, webinar hosting, resource sharing, peer review system, resource library</div>
+                <div class="result-item">Conference Book (for each year)</div>
+                <div class="result-item">Conference agenda, promotional materials, photos</div>
+            </div>
+        </div>
+
+        <!-- WP7 EN -->
+        <div class="result-accordion">
+            <div class="result-accordion-header" onclick="toggleResult(this)">
+                <span class="result-accordion-title">Work Package 7: Impact and Dissemination</span>
+                <svg class="result-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="result-accordion-body">
+                <div class="result-sub-title">Deliverables:</div>
+                <div class="result-item">GreenCamUz_D7.1_Dissemination strategy</div>
+                <div class="result-item">GreenCamUz_D7.2_Sustainability and Exploitation Plan</div>
+                <div class="result-item">GreenCamUz_D7.3_Project website</div>
+                <div class="result-item">GreenCamUz_D7.4_Mid-term Dissemination and Exploitation report</div>
+                <div class="result-item">GreenCamUz_D7.5_Final Dissemination and Exploitation report</div>
+                <div class="result-sub-title">Results/Outcomes:</div>
+                <div class="result-item">Project website launched (greencam.uz) in Uzbek and English</div>
+                <div class="result-item">Dissemination strategy implemented across all channels</div>
+                <div class="result-item">Sustainability plan ensuring post-funding continuation</div>
+                <div class="result-sub-title">Service/Product:</div>
+                <div class="result-item">Project website: www.greencam.uz</div>
+                <div class="result-item">Social media presence in Uzbek and English</div>
+                <div class="result-item">Promotional materials</div>
+                <div class="result-item">Success stories and best practices publications</div>
+            </div>
+        </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+<script>
+function toggleResult(header) {
+    var acc = header.parentElement;
+    var wasActive = acc.classList.contains('active');
+    document.querySelectorAll('.result-accordion.active').forEach(function(el) {
+        el.classList.remove('active');
+    });
+    if (!wasActive) {
+        acc.classList.add('active');
+    }
+}
+</script>
+{% endblock %}

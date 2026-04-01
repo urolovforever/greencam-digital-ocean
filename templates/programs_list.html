@@ -1,47 +1,80 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Our Programs - Green Campus Initiative{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Activities" %} - GreenCamUz{% endblock %}
+
+{% block extra_css %}
+<style>
+.activities-page {
+    padding-top: 140px;
+    padding-bottom: 80px;
+}
+
+.activities-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 48px;
+}
+
+.activities-header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: #1a1a2e;
+    border-left: 4px solid #2e5b15;
+    padding-left: 20px;
+}
+
+.activities-breadcrumb {
+    font-size: 14px;
+    color: rgba(26,26,46,0.5);
+}
+
+.activities-breadcrumb a {
+    color: rgba(26,26,46,0.5);
+    text-decoration: none;
+}
+
+.activities-breadcrumb a:hover {
+    color: #2e5b15;
+}
+
+@media (max-width: 768px) {
+    .activities-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .activities-header h1 { font-size: 32px; }
+}
+</style>
+{% endblock %}
 
 {% block content %}
-<!-- Programs Section -->
-<section class="programs-section" id="programs" style="padding-top: 140px;">
+<section class="about-section activities-page">
     <div class="section-content">
-        <div class="programs-header">
-            <span class="section-tag">Our Programs</span>
-            <h2 class="section-title">A Comprehensive Approach to Campus Ecology</h2>
-            <p class="section-subtitle">Key directions that transform universities into sustainable development centers</p>
+
+        <div class="activities-header">
+            <h1>{% trans "Activities" %}</h1>
+            <div class="activities-breadcrumb">
+                <a href="{% url 'core:home' %}">{% trans "Home" %}</a> / {% trans "Activities" %}
+            </div>
         </div>
-        <div class="programs-grid">
-            {% for program in programs %}
-            <div class="program-card">
-                <div class="program-icon-wrap">
-                    {% if program.cover_image %}
-                        <img src="{{ program.cover_image.url }}" alt="{{ program.title }}" class="program-icon-img">
-                    {% else %}
-                        <div class="media-placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 17 3.5s1.5 5 .8 10.5A7 7 0 0 1 11 20"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg><span>GreenCam</span></div>
-                    {% endif %}
-                </div>
-                <h3 class="program-title">{{ program.title }}</h3>
-                <p class="program-desc">{{ program.description }}</p>
-                <a href="{% url 'programs:detail' program.slug %}" class="program-link">
-                    Learn More
-                    <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 12h14"/>
-                        <path d="m12 5 7 7-7 7"/>
-                    </svg>
-                </a>
-                <div class="program-glow"></div>
-            </div>
-            {% empty %}
-            <div class="empty-state">
-                <p class="empty-state-text">No programs available at the moment.</p>
-            </div>
+
+        <div class="wp-grid">
+            {% for wp in wp_list %}
+            <a href="{% url 'programs:wp_detail' wp.num %}" class="wp-card">
+                <span class="wp-card-num">WP{{ wp.num }}</span>
+                <h3 class="wp-card-title">{{ wp.title }}</h3>
+                <div class="wp-card-meta">{% trans "Lead" %}: {{ wp.lead }} | {{ wp.duration }}</div>
+                <p class="wp-card-desc">{{ wp.description }}</p>
+                <span class="wp-card-link">
+                    {% trans "Read more" %}
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </span>
+            </a>
             {% endfor %}
         </div>
 
-        <!-- Pagination -->
-        {% include 'includes/pagination.html' with page_obj=programs %}
     </div>
 </section>
 {% endblock %}

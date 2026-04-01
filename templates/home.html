@@ -1,342 +1,152 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Green Campus Initiative - Creating a Sustainable Future{% endblock %}
+{% block title %}GreenCamUz — Erasmus+ CBHE{% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
 <section class="hero">
     <div class="hero-content">
         <div class="hero-tag">
-            <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
-                <path d="M5 3v4"/>
-                <path d="M19 17v4"/>
-                <path d="M3 5h4"/>
-                <path d="M17 19h4"/>
-            </svg>
-            <span>Sustainable Development Initiative</span>
+            <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+            <span>Erasmus+ CBHE Strand 1</span>
         </div>
         <h1 class="hero-title">
-            <span>Creating a </span>
-            <span class="hero-highlight">green </span>
-            <br><span>future together with universities</span>
+            <span>{% trans "Green Campus — for a" %} </span>
+            <span class="hero-highlight">{% trans "sustainable future" %}</span>
         </h1>
-        <p class="hero-subtitle">Green Campus Initiative unites students, faculty, and administration to create environmentally sustainable educational spaces</p>
+        <p class="hero-subtitle">{% trans "The GreenCamUz project is implemented by 9 partner universities to integrate sustainability principles into education at 6 universities in Uzbekistan." %}</p>
         <div class="hero-cta">
-            <a href="{% url 'programs:list' %}" class="primary-btn">
-                <span>Get Started</span>
-                <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M5 12h14"/>
-                    <path d="m12 5 7 7-7 7"/>
-                </svg>
+            <a href="{% url 'core:about' %}" class="primary-btn">
+                <span>{% trans "About Project" %}</span>
+                <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
-            <a href="#" class="secondary-btn" id="watchVideoBtn" onclick="openVideoModal(); return false;">
-                <div class="play-icon-wrap">
-                    <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="#2e5b15" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polygon points="5 3 19 12 5 21 5 3"/>
-                    </svg>
-                </div>
-                <span>Watch Video</span>
+            <a href="{% url 'programs:list' %}" class="secondary-btn">
+                <div class="play-icon-wrap"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="#2e5b15" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+                <span>{% trans "Activities" %}</span>
             </a>
         </div>
     </div>
 </section>
 
-<!-- About Section -->
-<section class="about-section" id="about">
-    <div class="section-content">
-        <div class="about-grid">
-            <div class="about-text">
-                <span class="section-tag">{{ about_content.tag|default:"About Green Campus Initiative" }}</span>
-                <h2 class="section-title">{{ about_content.title|default:"A Mission That Unites Generations" }}</h2>
-                {% if about_content %}
-                <div class="about-paragraph">{{ about_content.content|linebreaks }}</div>
-                {% else %}
-                <p class="about-paragraph">Green Campus Initiative: Integrating Sustainability into Higher Education in Uzbekistan (GreenCamUz) is an international project developed by partner higher education institutions from Uzbekistan, Europe, and Türkiye.</p>
-                <p class="about-paragraph">The project is funded by a €359,000 European Union grant under the Erasmus+ Capacity Building in Higher Education (CBHE) Strand 1 framework.</p>
-                {% endif %}
-                <div class="about-values">
-                    <div class="value-item">
-                        <div class="value-icon-wrap">
-                            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"/>
-                                <circle cx="12" cy="12" r="6"/>
-                                <circle cx="12" cy="12" r="2"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h4 class="value-title">Science & Innovation</h4>
-                            <p class="value-desc">Research-based solutions</p>
-                        </div>
-                    </div>
-                    <div class="value-item">
-                        <div class="value-icon-wrap">
-                            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="m11 17 2 2a1 1 0 1 0 3-3"/>
-                                <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/>
-                                <path d="m21 3 1 11h-2"/>
-                                <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/>
-                                <path d="M3 4h8"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h4 class="value-title">Community</h4>
-                            <p class="value-desc">Uniting activists across the country</p>
-                        </div>
-                    </div>
-                    <div class="value-item">
-                        <div class="value-icon-wrap">
-                            <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M7 20h10"/>
-                                <path d="M10 20c5.5-2.5.8-6.4 3-10"/>
-                                <path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/>
-                                <path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h4 class="value-title">Sustainability</h4>
-                            <p class="value-desc">Long-term environmental solutions</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="about-visual">
-                <div class="image-card">
-                    <div class="image-placeholder">
-                        <div class="image-pattern"></div>
-                        <div class="image-icon-wrap">
-                            {% if about_image %}
-                            <img src="{{ about_image.image.url }}" alt="{{ about_image.caption|default:'GreenCamUz' }}" class="action-image">
-                            {% else %}
-                            <div class="media-placeholder" style="min-height: 300px;"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 17 3.5s1.5 5 .8 10.5A7 7 0 0 1 11 20"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg><span>GreenCam</span></div>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Programs Section -->
-<section class="programs-section" id="programs">
-    <div class="section-content">
-        <div class="programs-header">
-            <span class="section-tag">Our Programs</span>
-            <h2 class="section-title">A Comprehensive Approach to Campus Ecology</h2>
-            <p class="section-subtitle">Key directions that transform universities into sustainable development centers</p>
-        </div>
-        <div class="programs-grid">
-            {% for program in programs %}
-            <a href="{% url 'programs:detail' program.slug %}" class="program-card" style="text-decoration: none; color: inherit;">
-                <div class="program-icon-wrap">
-                    {% if program.cover_image %}
-                        <img src="{{ program.cover_image.url }}" alt="{{ program.title }}" class="program-icon-img">
-                    {% else %}
-                        <div class="media-placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 17 3.5s1.5 5 .8 10.5A7 7 0 0 1 11 20"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg><span>GreenCam</span></div>
-                    {% endif %}
-                </div>
-                <h3 class="program-title">{{ program.title }}</h3>
-                <p class="program-desc">{{ program.description }}</p>
-                <span class="program-link">
-                    Learn More
-                    <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 12h14"/>
-                        <path d="m12 5 7 7-7 7"/>
-                    </svg>
-                </span>
-                <div class="program-glow"></div>
-            </a>
-            {% endfor %}
-        </div>
-        <div class="section-footer">
-            <a href="{% url 'programs:list' %}" class="view-all-btn">
-                <span>All Programs</span>
-                <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M5 12h14"/>
-                    <path d="m12 5 7 7-7 7"/>
-                </svg>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- News Section -->
+{% if news_list %}
 <section class="news-section" id="news">
     <div class="section-content">
         <div class="news-header">
-            <span class="section-tag">Latest News</span>
-            <h2 class="section-title">Stay Updated with Our Latest Achievements</h2>
+            <span class="section-tag">{% trans "News" %}</span>
+            <h2 class="section-title">{% trans "Latest News" %}</h2>
         </div>
         <div class="news-grid">
             {% for news in news_list %}
             <a href="{% url 'news:detail' news.slug %}" class="news-card" style="text-decoration: none; color: inherit;">
                 <div class="news-image">
                     <div class="news-image-placeholder">
-                        {% if news.cover_image %}
-                            <img src="{{ news.cover_image.url }}" alt="{{ news.title }}" class="news-icon-img">
-                        {% else %}
-                            <div class="media-placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 17 3.5s1.5 5 .8 10.5A7 7 0 0 1 11 20"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg><span>GreenCam</span></div>
-                        {% endif %}
+                        {% if news.cover_image %}<img src="{{ news.cover_image.url }}" alt="{{ news.translated_title }}" class="news-icon-img">{% else %}<div class="media-placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 17 3.5s1.5 5 .8 10.5A7 7 0 0 1 11 20"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg><span>GreenCam</span></div>{% endif %}
                     </div>
-                    <div class="news-badge">{{ news.get_category_display }}</div>
                 </div>
                 <div class="news-content">
-                    <div class="news-meta">
-                        <span class="news-date">{{ news.created_at|date:"F d, Y" }}</span>
-                    </div>
-                    <h3 class="news-title">{{ news.title }}</h3>
-                    <p class="news-excerpt">{{ news.excerpt }}</p>
-                    <span class="news-link">
-                        Read More
-                        <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M5 12h14"/>
-                            <path d="m12 5 7 7-7 7"/>
-                        </svg>
-                    </span>
+                    <div class="news-meta"><span class="news-date">{{ news.created_at|date:"d.m.Y" }}</span></div>
+                    <h3 class="news-title">{{ news.translated_title }}</h3>
+                    <p class="news-excerpt">{{ news.translated_excerpt }}</p>
+                    <span class="news-link">{% trans "Read more" %} <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
                 </div>
             </a>
             {% endfor %}
         </div>
         <div class="section-footer">
-            <a href="{% url 'news:list' %}" class="view-all-btn">
-                <span>All News</span>
-                <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M5 12h14"/>
-                    <path d="m12 5 7 7-7 7"/>
-                </svg>
-            </a>
+            <a href="{% url 'news:list' %}" class="view-all-btn"><span>{% trans "View all news" %}</span> <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
         </div>
     </div>
 </section>
+{% endif %}
 
-<!-- Events Section -->
+{% if wp_list %}
+<section class="programs-section" id="programs">
+    <div class="section-content">
+        <div class="programs-header">
+            <span class="section-tag">{% trans "Activities" %}</span>
+            <h2 class="section-title">{% trans "Project Activities" %}</h2>
+        </div>
+        <div class="wp-grid">
+            {% for wp in wp_list %}
+            <a href="{% url 'programs:wp_detail' wp.num %}" class="wp-card">
+                <span class="wp-card-num">WP{{ wp.num }}</span>
+                <h3 class="wp-card-title">{{ wp.title }}</h3>
+                <div class="wp-card-meta">{% trans "Lead" %}: {{ wp.lead }} | {{ wp.duration }}</div>
+                <p class="wp-card-desc">{{ wp.description|truncatewords:20 }}</p>
+                <span class="wp-card-link">{% trans "Read more" %} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+            </a>
+            {% endfor %}
+        </div>
+        <div class="section-footer">
+            <a href="{% url 'programs:list' %}" class="view-all-btn"><span>{% trans "View all activities" %}</span> <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% if events %}
 <section class="events-section" id="events">
     <div class="section-content">
         <div class="events-header">
             <div>
-                <span class="section-tag">Event Calendar</span>
-                <h2 class="section-title">Upcoming Events</h2>
+                <span class="section-tag">{% trans "Meetings" %}</span>
+                <h2 class="section-title">{% trans "Consortium Meetings" %}</h2>
             </div>
-            <a href="{% url 'events:list' %}" class="all-events-btn">
-                <span>All Events</span>
-                <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M5 12h14"/>
-                    <path d="m12 5 7 7-7 7"/>
-                </svg>
-            </a>
+            <a href="{% url 'events:list' %}" class="all-events-btn"><span>{% trans "All meetings" %}</span> <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
         </div>
         <div class="events-grid">
             {% for event in events %}
             <div class="event-card">
                 <div class="event-date">
-                    <svg class="icon icon-mb" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
-                        <line x1="16" x2="16" y1="2" y2="6"/>
-                        <line x1="8" x2="8" y1="2" y2="6"/>
-                        <line x1="3" x2="21" y1="10" y2="10"/>
-                    </svg>
+                    <svg class="icon icon-mb" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
                     <span class="event-day">{{ event.date|date:"d" }}</span>
                     <span class="event-month">{{ event.date|date:"M" }}</span>
                 </div>
                 <div class="event-info">
-                    <h4 class="event-title">{{ event.name }}</h4>
-                    <p class="event-location">
-                        <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
-                            <circle cx="12" cy="10" r="3"/>
-                        </svg>
-                        {{ event.location }}
-                    </p>
-                    {% if event.description %}
-                    <p class="event-description-preview">{{ event.description|truncatewords:20 }}</p>
-                    {% endif %}
+                    <h4 class="event-title">{{ event.translated_name }}</h4>
+                    <p class="event-location"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> {{ event.translated_location }}</p>
+                    {% if event.description %}<p class="event-description-preview">{{ event.description|truncatewords:20 }}</p>{% endif %}
                 </div>
-                <a href="{% url 'events:detail' event.id %}" class="event-btn">
-                    See More
-                    <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 12h14"/>
-                        <path d="m12 5 7 7-7 7"/>
-                    </svg>
-                </a>
+                <a href="{% url 'events:detail' event.id %}" class="event-btn">{% trans "Details" %} <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
             </div>
             {% endfor %}
         </div>
     </div>
 </section>
+{% endif %}
 
-<!-- Consortium Section -->
 {% if partners %}
 <section class="partners-section">
     <div class="container">
         <div class="partners-header">
-            <span class="section-tag">Consortium</span>
-            <h2 class="section-title">Trusted by Leading Organizations</h2>
+            <span class="section-tag">{% trans "Partners" %}</span>
+            <h2 class="section-title">{% trans "Project Partners" %}</h2>
         </div>
         <div class="partners-carousel-wrapper">
             <div class="partners-carousel">
-                {% for partner in partners %}
-                <div class="partner-item">
-                    {% if partner.website_url %}
-                    <a href="{{ partner.website_url }}" target="_blank" rel="noopener noreferrer" class="partner-link">
-                        <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo">
-                    </a>
-                    {% else %}
-                    <div class="partner-link">
-                        <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo">
-                    </div>
-                    {% endif %}
-                </div>
-                {% endfor %}
-                <!-- Duplicate for seamless loop -->
-                {% for partner in partners %}
-                <div class="partner-item">
-                    {% if partner.website_url %}
-                    <a href="{{ partner.website_url }}" target="_blank" rel="noopener noreferrer" class="partner-link">
-                        <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo">
-                    </a>
-                    {% else %}
-                    <div class="partner-link">
-                        <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo">
-                    </div>
-                    {% endif %}
-                </div>
-                {% endfor %}
+                {% for partner in partners %}<div class="partner-item">{% if partner.website_url %}<a href="{{ partner.website_url }}" target="_blank" rel="noopener noreferrer" class="partner-link"><img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo"></a>{% else %}<div class="partner-link"><img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo"></div>{% endif %}</div>{% endfor %}
+                {% for partner in partners %}<div class="partner-item">{% if partner.website_url %}<a href="{{ partner.website_url }}" target="_blank" rel="noopener noreferrer" class="partner-link"><img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo"></a>{% else %}<div class="partner-link"><img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo"></div>{% endif %}</div>{% endfor %}
             </div>
         </div>
     </div>
 </section>
 {% endif %}
 
-<!-- Video Modal -->
-<div id="videoModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; justify-content:center; align-items:center;">
-    <div style="position:relative; width:90%; max-width:900px;">
-        <button onclick="closeVideoModal()" style="position:absolute; top:-40px; right:0; background:none; border:none; color:#fff; font-size:32px; cursor:pointer; z-index:10000;">&times;</button>
-        <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px;">
-            <iframe id="videoIframe" style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+{% if gallery_photos %}
+<section class="about-section" id="gallery-preview">
+    <div class="section-content">
+        <span class="section-tag">{% trans "Gallery" %}</span>
+        <h2 class="section-title">{% trans "Photos" %}</h2>
+        <div class="home-gallery-grid">
+            {% for photo in gallery_photos %}
+            <div class="home-gallery-item"><img src="{{ photo.file.url }}" alt="{{ photo.caption|default:'GreenCamUz' }}" loading="lazy"></div>
+            {% endfor %}
+        </div>
+        <div class="section-footer">
+            <a href="{% url 'gallery:list' %}" class="view-all-btn"><span>{% trans "View all photos" %}</span> <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
         </div>
     </div>
-</div>
-
-<script>
-function openVideoModal() {
-    var modal = document.getElementById('videoModal');
-    var iframe = document.getElementById('videoIframe');
-    iframe.src = 'https://www.youtube.com/embed/t0cZERrvzaQ?si=kWtqwYua67gKiqoX&autoplay=1&rel=0';
-    modal.style.display = 'flex';
-}
-function closeVideoModal() {
-    var modal = document.getElementById('videoModal');
-    var iframe = document.getElementById('videoIframe');
-    iframe.src = '';
-    modal.style.display = 'none';
-}
-document.getElementById('videoModal').addEventListener('click', function(e) {
-    if (e.target === this) closeVideoModal();
-});
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeVideoModal();
-});
-</script>
+</section>
+{% endif %}
 {% endblock %}

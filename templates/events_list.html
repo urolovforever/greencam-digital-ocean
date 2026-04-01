@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Events - Green Campus Initiative{% endblock %}
+{% block title %}Meetings - GreenCamUz{% endblock %}
 
 {% block content %}
-<!-- Events Section -->
+<!-- Meetings Section -->
 <section class="events-section" id="events" style="padding-top: 140px;">
     <div class="section-content">
         <div class="events-header">
             <div>
-                <span class="section-tag">Event Calendar</span>
-                <h2 class="section-title">Upcoming Events</h2>
+                <span class="section-tag">{% trans "Meetings" %}</span>
+                <h2 class="section-title">{% trans "Consortium Meetings" %}</h2>
             </div>
         </div>
         <div class="events-grid">
@@ -27,20 +28,20 @@
                     <span class="event-month">{{ event.date|date:"M" }}</span>
                 </div>
                 <div class="event-info">
-                    <h4 class="event-title">{{ event.name }}</h4>
+                    <h4 class="event-title">{{ event.translated_name }}</h4>
                     <p class="event-location">
                         <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
                             <circle cx="12" cy="10" r="3"/>
                         </svg>
-                        {{ event.location }}
+                        {{ event.translated_location }}
                     </p>
                     {% if event.description %}
-                    <p class="event-description-preview">{{ event.description|truncatewords:20 }}</p>
+                    <p class="event-description-preview">{{ event.translated_description|truncatewords:20 }}</p>
                     {% endif %}
                 </div>
                 <a href="{% url 'events:detail' event.id %}" class="event-btn">
-                    See More
+                    {% trans "Details" %}
                     <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5 12h14"/>
                         <path d="m12 5 7 7-7 7"/>
@@ -49,7 +50,7 @@
             </div>
             {% empty %}
             <div class="empty-state">
-                <p class="empty-state-text">No events scheduled at the moment.</p>
+                <p class="empty-state-text">{% trans "No meetings scheduled at the moment." %}</p>
             </div>
             {% endfor %}
         </div>

@@ -1,60 +1,93 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}FAQ - Green Campus Initiative{% endblock %}
+{% block title %}FAQ - GreenCamUz{% endblock %}
+
+{% block extra_css %}
+<style>
+.faq-page { padding-top: 140px; padding-bottom: 80px; }
+.faq-page .section-content { max-width: 800px; }
+.faq-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 48px; }
+.faq-header h1 { font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #2e5b15; padding-left: 20px; }
+.faq-breadcrumb { font-size: 14px; color: rgba(26,26,46,0.5); }
+.faq-breadcrumb a { color: rgba(26,26,46,0.5); text-decoration: none; }
+.faq-breadcrumb a:hover { color: #2e5b15; }
+.faq-item { margin-bottom: 12px; }
+.faq-question { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; background: rgba(46,91,21,0.04); border: 1px solid rgba(46,91,21,0.08); border-radius: 16px; cursor: pointer; transition: all 0.3s ease; user-select: none; }
+.faq-question:hover { background: rgba(46,91,21,0.08); border-color: rgba(46,91,21,0.15); }
+.faq-item.active .faq-question { border-color: rgba(46,91,21,0.3); border-radius: 16px 16px 0 0; background: rgba(46,91,21,0.06); }
+.faq-question-text { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; color: #1a1a2e; }
+.faq-item.active .faq-question-text { color: #2e5b15; }
+.faq-arrow { width: 22px; height: 22px; flex-shrink: 0; transition: transform 0.3s ease; color: rgba(26,26,46,0.4); }
+.faq-item.active .faq-arrow { transform: rotate(180deg); color: #2e5b15; }
+.faq-answer { display: none; padding: 20px 24px; border: 1px solid rgba(46,91,21,0.08); border-top: none; border-radius: 0 0 16px 16px; background: #fff; font-size: 15px; color: rgba(26,26,46,0.75); line-height: 1.8; }
+.faq-item.active .faq-answer { display: block; }
+@media (max-width: 768px) { .faq-header { flex-direction: column; align-items: flex-start; gap: 8px; } .faq-header h1 { font-size: 32px; } .faq-question { padding: 16px 18px; } .faq-question-text { font-size: 14px; } .faq-answer { padding: 16px 18px; font-size: 14px; } }
+</style>
+{% endblock %}
 
 {% block content %}
-<section class="static-page-section">
+{% get_current_language as LANG %}
+<section class="about-section faq-page">
     <div class="section-content">
-        <div class="page-header">
-            <span class="section-tag">Help Center</span>
-            <h1 class="page-title">Frequently Asked Questions</h1>
-            <p class="page-subtitle">Find answers to common questions about Green Campus Initiative</p>
+        <div class="faq-header">
+            <h1>FAQ</h1>
+            <div class="faq-breadcrumb"><a href="{% url 'core:home' %}">{% trans "Home" %}</a> / FAQ</div>
         </div>
 
-        <div class="faq-container">
-            <div class="faq-item">
-                <h3 class="faq-question">What is Green Campus Initiative?</h3>
-                <p class="faq-answer">Green Campus Initiative is a comprehensive program aimed at transforming university campuses into sustainable, environmentally-friendly spaces through various ecological projects and community engagement.</p>
-            </div>
+{% if LANG == 'uz' %}
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">GreenCamUz loyihasi nima?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">GreenCamUz — "Yashil kampus tashabbusi: O'zbekistonda oliy ta'limga barqarorlikni integratsiya qilish" loyihasi bo'lib, Yevropa Ittifoqi tomonidan Erasmus+ CBHE Strand 1 dasturi doirasida moliyalashtirilmoqda. Loyiha O'zbekistondagi 6 ta universitetda barqarorlik tamoyillarini ta'lim jarayoniga integratsiya qilishga qaratilgan.</div></div>
 
-            <div class="faq-item">
-                <h3 class="faq-question">How can I participate?</h3>
-                <p class="faq-answer">You can participate by joining our volunteer programs, attending events, or partnering with us. Visit our Contact page to get started.</p>
-            </div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">Loyiha qachon boshlangan va qancha davom etadi?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">Loyiha 36 oy davomida amalga oshiriladi (2025–2028).</div></div>
 
-            <div class="faq-item">
-                <h3 class="faq-question">Are the events free to attend?</h3>
-                <p class="faq-answer">Most of our events are free and open to all students, faculty, and community members. Some specialized workshops may require registration.</p>
-            </div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">Loyiha byudjeti qancha?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">Yevropa Ittifoqidan €359,682.44 grant ajratilgan.</div></div>
 
-            <div class="faq-item">
-                <h3 class="faq-question">How is the initiative funded?</h3>
-                <p class="faq-answer">We receive funding through university partnerships, grants, corporate sponsorships, and community donations. All funds are transparently managed for environmental projects.</p>
-            </div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">Loyihada qaysi universitetlar ishtirok etmoqda?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">9 ta hamkor universitet: Qo'qon Universiteti (koordinator), Politechnika Opolska (Polsha), Vilnius Tech (Litva), Karabük Universiteti (Türkiye), Toshkent Xalqaro Universiteti (TIU), Markaziy Osiyo Universiteti (CAGU), Alfraganus Universiteti (AFU), Andijon Davlat Texnika Instituti (ASTI), Biznes va Tadbirkorlik Oliy Maktabi (GSBE). Shuningdek 3 ta assotsiatsiyalashgan hamkor: Ekologiya vazirligi, Oliy ta'lim vazirligi va Toshkent Davlat Sharqshunoslik Universiteti.</div></div>
 
-            <div class="faq-item">
-                <h3 class="faq-question">Can other universities join?</h3>
-                <p class="faq-answer">Yes! We welcome partnerships with universities across the region. Contact us to discuss how we can collaborate.</p>
-            </div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">Loyihaning asosiy maqsadlari nima?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">6 ta universitet uchun yashil kampus strategiyalarini ishlab chiqish, 12 ta barqarorlikka yo'naltirilgan yangi kurslar yaratish, 48 ta o'qituvchi va 24 ta ma'muriy xodim malakasini oshirish, 120 ta yashil kampus elchisini tayyorlash, 6 ta pilot loyiha amalga oshirish, yillik Green Campus konferensiya tashkil etish va 1000+ foydalanuvchili virtual platforma yaratish.</div></div>
 
-            <div class="faq-item">
-                <h3 class="faq-question">What impact have you achieved so far?</h3>
-                <p class="faq-answer">We've implemented 89+ eco-projects, reduced carbon emissions by 47%, planted 2.3M trees, and engaged over 12,000 active participants across partner universities.</p>
-            </div>
-        </div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">Loyiha koordinatori kim?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">Qo'qon Universiteti (KU), koordinator — Ulugbek Mamadaliev.</div></div>
 
-        <div class="page-cta">
-            <h3 class="cta-title">Still have questions?</h3>
-            <p class="cta-subtitle">We're here to help! Reach out to us and we'll get back to you as soon as possible.</p>
-            <a href="{% url 'contact:contact' %}" class="btn-primary-green">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect width="20" height="16" x="2" y="4" rx="2"/>
-                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-                </svg>
-                Contact Us
-            </a>
-        </div>
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">Pilot loyihalar qaysi universitetlarda amalga oshiriladi?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">Har bir O'zbekiston hamkorida bittadan: KU — Green Campus Eco-Park, TIU — Smart Waste Management System, CAGU — Solar-Powered Campus Lighting, AFU — Campus Water Conservation System, ASTI — Green Trees Database, GSBE — Air Quality Monitoring.</div></div>
+
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">Loyiha natijalari qayerda e'lon qilinadi?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">Barcha ommaviy natijalar greencam.uz saytining "Natijalar" bo'limida va Erasmus+ Project Results platformasida e'lon qilinadi.</div></div>
+
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">Loyihaga qanday qo'shilish mumkin?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">Hamkorlik yoki savollar uchun "Bog'lanish" sahifasi orqali murojaat qiling: greencamuz@gmail.com</div></div>
+
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">Veb-sayt qaysi tillarda mavjud?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">Sayt ikki tilda ishlaydi: o'zbek va ingliz tillarida.</div></div>
+
+{% else %}
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">What is the GreenCamUz project?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">GreenCamUz — "Green Campus Initiative: Integrating Sustainability into Higher Education in Uzbekistan" — is a project funded by the European Union under the Erasmus+ CBHE Strand 1 programme. The project aims to integrate sustainability principles into education at 6 universities in Uzbekistan.</div></div>
+
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">When did the project start and how long does it last?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">The project is implemented over 36 months (2025–2028).</div></div>
+
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">What is the project budget?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">The EU grant amounts to €359,682.44.</div></div>
+
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">Which universities participate in the project?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">9 partner universities: Kokand University (coordinator), Opole University of Technology (Poland), Vilnius Tech (Lithuania), Karabük University (Türkiye), Tashkent International University (TIU), Central Asian University (CAGU), Alfraganus University (AFU), Andijan State Technical Institute (ASTI), Graduate School of Business and Entrepreneurship (GSBE). Plus 3 associated partners: Ministry of Ecology, Ministry of Higher Education, and Tashkent State University of Oriental Studies.</div></div>
+
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">What are the main objectives of the project?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">Developing green campus strategies for 6 universities, creating 12 new sustainability-focused courses, training 48 faculty members and 24 administrative staff, training 120 Green Campus Ambassadors, implementing 6 pilot projects, organizing annual Green Campus Conference, and creating a virtual platform for 1,000+ users.</div></div>
+
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">Who is the project coordinator?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">Kokand University (KU), coordinator — Ulugbek Mamadaliev.</div></div>
+
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">At which universities will pilot projects be implemented?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">One at each UZ partner: KU — Green Campus Eco-Park, TIU — Smart Waste Management System, CAGU — Solar-Powered Campus Lighting, AFU — Campus Water Conservation System, ASTI — Green Trees Database, GSBE — Air Quality Monitoring.</div></div>
+
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">Where are project results published?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">All public results are published in the "Results" section of greencam.uz and on the Erasmus+ Project Results platform.</div></div>
+
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">How can I get involved with the project?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">For partnerships or questions, please contact us via the "Contact" page: greencamuz@gmail.com</div></div>
+
+        <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span class="faq-question-text">In which languages is the website available?</span><svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-answer">The website is available in two languages: Uzbek and English.</div></div>
+{% endif %}
+
     </div>
 </section>
+
+<script>
+function toggleFaq(el) {
+    var item = el.parentElement;
+    var wasActive = item.classList.contains('active');
+    document.querySelectorAll('.faq-item.active').forEach(function(i) { i.classList.remove('active'); });
+    if (!wasActive) item.classList.add('active');
+}
+</script>
 {% endblock %}

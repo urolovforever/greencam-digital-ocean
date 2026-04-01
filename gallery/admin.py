@@ -5,7 +5,7 @@ from .models import Gallery
 
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'media_preview', 'media_type', 'caption', 'source', 'created_at')
+    list_display = ('id', 'media_preview', 'media_type', 'source', 'created_at')
     list_display_links = ('id', 'media_preview')
     list_filter = ('media_type', 'source')
     readonly_fields = ('media_preview_large', 'created_at')
@@ -42,7 +42,7 @@ class GalleryAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Media', {
-            'fields': ('media_type', 'file', 'caption', 'media_preview_large')
+            'fields': ('media_type', 'file', 'media_preview_large')
         }),
         ('Info', {
             'fields': ('created_at',),

@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}404 - Page Not Found{% endblock %}
+{% block title %}404 - {% trans "Page not found" %}{% endblock %}
 
 {% block content %}
 <section class="error-section">
@@ -19,9 +20,9 @@
             </div>
 
             <div class="error-content">
-                <h1 class="error-title">Page Not Found</h1>
+                <h1 class="error-title">{% trans "Page not found" %}</h1>
                 <p class="error-description">
-                    The page you're looking for doesn't exist or has been moved. Let's get you back on track.
+                    {% trans "The page you are looking for does not exist or has been moved. Let us get you back on the right track." %}
                 </p>
 
                 <div class="error-actions">
@@ -29,24 +30,24 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                         </svg>
-                        Go Home
+                        {% trans "Home" %}
                     </a>
                     <button onclick="history.back()" class="btn-secondary-outline">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M19 12H5"/>
                             <path d="m12 19-7-7 7-7"/>
                         </svg>
-                        Go Back
+                        {% trans "Go back" %}
                     </button>
                 </div>
 
                 <div class="error-links">
-                    <p class="error-links-title">Quick Links:</p>
+                    <p class="error-links-title">{% trans "Quick links:" %}</p>
                     <div class="quick-links-grid">
-                        <a href="{% url 'programs:list' %}" class="quick-link">Programs</a>
-                        <a href="{% url 'news:list' %}" class="quick-link">News</a>
-                        <a href="{% url 'events:list' %}" class="quick-link">Events</a>
-                        <a href="{% url 'contact:contact' %}" class="quick-link">Contact</a>
+                        <a href="{% url 'programs:list' %}" class="quick-link">{% trans "Programs" %}</a>
+                        <a href="{% url 'news:list' %}" class="quick-link">{% trans "News" %}</a>
+                        <a href="{% url 'events:list' %}" class="quick-link">{% trans "Meetings" %}</a>
+                        <a href="{% url 'contact:contact' %}" class="quick-link">{% trans "Contact" %}</a>
                     </div>
                 </div>
             </div>

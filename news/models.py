@@ -1,9 +1,9 @@
 from django.db import models
 from django.utils.text import slugify
+from core.utils import get_translated
 
 
 class News(models.Model):
-    """News model for campus news and updates"""
     CATEGORY_CHOICES = [
         ('environment', 'Environment'),
         ('community', 'Community'),
@@ -12,10 +12,13 @@ class News(models.Model):
         ('event', 'Event'),
     ]
 
-    title = models.CharField(max_length=200, verbose_name="Title")
+    title = models.CharField(max_length=200, verbose_name="Title (EN)")
+    title_uz = models.CharField(max_length=200, blank=True, verbose_name="Title (UZ)")
     slug = models.SlugField(max_length=250, unique=True, blank=True)
-    excerpt = models.TextField(max_length=300, verbose_name="Excerpt", help_text="Short description for list view")
-    content = models.TextField(verbose_name="Content", help_text="Full article content for detail view")
+    excerpt = models.TextField(max_length=300, verbose_name="Excerpt (EN)", help_text="Short description for list view")
+    excerpt_uz = models.TextField(max_length=300, blank=True, verbose_name="Excerpt (UZ)")
+    content = models.TextField(verbose_name="Content (EN)", help_text="Full article content")
+    content_uz = models.TextField(blank=True, verbose_name="Content (UZ)")
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='environment', verbose_name="Category")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -36,8 +39,19 @@ class News(models.Model):
         super().save(*args, **kwargs)
 
     @property
+    def translated_title(self):
+        return get_translated(self, 'title')
+
+    @property
+    def translated_excerpt(self):
+        return get_translated(self, 'excerpt')
+
+    @property
+    def translated_content(self):
+        return get_translated(self, 'content')
+
+    @property
     def cover_image(self):
-        """Return cover image marked in admin, or first image"""
         cover = self.media.filter(is_cover=True, media_type='image').first()
         if not cover:
             cover = self.media.filter(media_type='image').first()
@@ -45,7 +59,6 @@ class News(models.Model):
 
 
 class NewsMedia(models.Model):
-    """Media files (images and videos) for news"""
     MEDIA_TYPE_CHOICES = [
         ('image', 'Image'),
         ('video', 'Video'),
@@ -54,7 +67,7 @@ class NewsMedia(models.Model):
     media_type = models.CharField(max_length=5, choices=MEDIA_TYPE_CHOICES, verbose_name="Type")
     file = models.FileField(upload_to='news/media/', verbose_name="File")
     caption = models.CharField(max_length=255, blank=True, verbose_name="Caption")
-    is_cover = models.BooleanField(default=False, verbose_name="Cover Image", help_text="Use as cover image on cards")
+    is_cover = models.BooleanField(default=False, verbose_name="Cover Image")
     order = models.PositiveIntegerField(default=0, verbose_name="Order")
 
     class Meta:

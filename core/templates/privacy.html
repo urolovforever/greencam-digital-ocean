@@ -1,41 +1,63 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Privacy Policy - Green Campus Initiative{% endblock %}
+{% block title %}{% trans "Privacy Policy" %} - GreenCamUz{% endblock %}
+
+{% block extra_css %}
+<style>
+.legal-page { padding-top: 140px; padding-bottom: 80px; }
+.legal-page .section-content { max-width: 800px; }
+.legal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 48px; }
+.legal-header h1 { font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 700; color: #1a1a2e; border-left: 4px solid #2e5b15; padding-left: 20px; }
+.legal-breadcrumb { font-size: 14px; color: rgba(26,26,46,0.5); }
+.legal-breadcrumb a { color: rgba(26,26,46,0.5); text-decoration: none; }
+.legal-breadcrumb a:hover { color: #2e5b15; }
+.legal-updated { font-size: 14px; color: rgba(26,26,46,0.5); margin-bottom: 32px; }
+.legal-section { margin-bottom: 28px; }
+.legal-section h2 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: #2e5b15; margin-bottom: 10px; }
+.legal-section p { font-size: 15px; color: rgba(26,26,46,0.75); line-height: 1.8; }
+@media (max-width: 768px) { .legal-header { flex-direction: column; align-items: flex-start; gap: 8px; } .legal-header h1 { font-size: 32px; } }
+</style>
+{% endblock %}
 
 {% block content %}
-<section class="static-page-section">
+{% get_current_language as LANG %}
+<section class="about-section legal-page">
     <div class="section-content">
-        <div class="page-header">
-            <span class="section-tag">Legal</span>
-            <h1 class="page-title">Privacy Policy</h1>
-            <p class="page-subtitle">Last updated: January 2026</p>
+        <div class="legal-header">
+            <h1>{% trans "Privacy Policy" %}</h1>
+            <div class="legal-breadcrumb"><a href="{% url 'core:home' %}">{% trans "Home" %}</a> / {% trans "Privacy Policy" %}</div>
         </div>
+        <p class="legal-updated">{% if LANG == 'uz' %}Oxirgi yangilanish: 2026-yil 1-aprel{% else %}Last updated: April 1, 2026{% endif %}</p>
 
-        <div class="content-block">
-            <h2 class="content-title">Information We Collect</h2>
-            <p class="content-text">When you register for events or contact us, we collect personal information such as your name, email address, and phone number. This information is used solely to communicate with you about our programs and events.</p>
-        </div>
-
-        <div class="content-block">
-            <h2 class="content-title">How We Use Your Information</h2>
-            <p class="content-text">We use your information to send event notifications, program updates, and important announcements. We never sell or share your personal data with third parties without your explicit consent.</p>
-        </div>
-
-        <div class="content-block">
-            <h2 class="content-title">Data Security</h2>
-            <p class="content-text">We implement appropriate security measures to protect your personal information. All data is stored securely and accessed only by authorized personnel.</p>
-        </div>
-
-        <div class="content-block">
-            <h2 class="content-title">Your Rights</h2>
-            <p class="content-text">You have the right to access, correct, or delete your personal information at any time. Contact us if you wish to exercise these rights.</p>
-        </div>
-
-        <div class="content-block">
-            <h2 class="content-title">Contact</h2>
-            <p class="content-text">For privacy-related questions, please contact us at privacy@greencampus.uz</p>
-        </div>
+{% if LANG == 'uz' %}
+        <div class="legal-section"><h2>1. Kirish</h2><p>Ushbu Maxfiylik siyosati GreenCamUz loyiha konsortsiumi ("biz") greencam.uz veb-sayti orqali shaxsiy ma'lumotlarni qanday to'plashi, ishlatishi va himoya qilishini tushuntiradi. GreenCamUz loyihasi (No. 101234907) Yevropa Ittifoqi tomonidan Erasmus+ CBHE Strand 1 dasturi doirasida moliyalashtirilgan bo'lib, Qo'qon Universiteti (O'zbekiston) tomonidan koordinatsiya qilinadi.</p></div>
+        <div class="legal-section"><h2>2. Ma'lumotlar nazoratchisi</h2><p>Qo'qon Universiteti (KU)<br>Turkiston ko'chasi, 28A-uy, Qo'qon 150700, O'zbekiston<br>Email: greencamuz@gmail.com<br>Telefon: +998 90 927 14 00</p></div>
+        <div class="legal-section"><h2>3. Qanday ma'lumotlar to'planadi</h2><p>Biz quyidagi shaxsiy ma'lumotlarni to'plashimiz mumkin: ism, email manzil, telefon raqami va muassasa nomi — faqat bog'lanish formasi orqali ixtiyoriy ravishda yuborilganda. Shuningdek, standart veb-server jurnallari orqali anonim foydalanish ma'lumotlari to'planadi (IP manzil, brauzer turi, tashrif buyurilgan sahifalar).</p></div>
+        <div class="legal-section"><h2>4. Ma'lumotlarni qayta ishlash maqsadi</h2><p>Shaxsiy ma'lumotlar quyidagi maqsadlarda qayta ishlanadi: bog'lanish formasi orqali yuborilgan so'rovlarga javob berish, loyiha bilan bog'liq ma'lumotlarni manfaatdor tomonlar va hamkorlarga yetkazish va EACEA oldidagi hisobot majburiyatlarini bajarish.</p></div>
+        <div class="legal-section"><h2>5. Huquqiy asos</h2><p>Shaxsiy ma'lumotlar (EU) 2016/679 Reglamentiga (GDPR) va O'zbekiston Respublikasi milliy qonunchiligiga muvofiq qayta ishlanadi.</p></div>
+        <div class="legal-section"><h2>6. Ma'lumotlarni ulashish</h2><p>Shaxsiy ma'lumotlar quyidagilar bilan bo'lishilishi mumkin: loyiha konsortsiumi hamkor muassasalari, EACEA, va Yevropa Komissiyasi tomonidan tayinlangan auditorlar. Biz shaxsiy ma'lumotlarni tijorat maqsadlarida uchinchi tomonlarga sotmaymiz.</p></div>
+        <div class="legal-section"><h2>7. Ma'lumotlarni saqlash</h2><p>Shaxsiy ma'lumotlar loyiha davomida (36 oy) va yakuniy to'lovdan keyin 5 yil davomida saqlanadi.</p></div>
+        <div class="legal-section"><h2>8. Ma'lumotlar xavfsizligi</h2><p>Biz shaxsiy ma'lumotlar xavfsizligini ta'minlash uchun tegishli texnik va tashkiliy choralarni ko'ramiz.</p></div>
+        <div class="legal-section"><h2>9. Sizning huquqlaringiz</h2><p>GDPR bo'yicha siz quyidagi huquqlarga egasiz: shaxsiy ma'lumotlarga kirish, noto'g'ri ma'lumotlarni tuzatish, ma'lumotlarni o'chirishni so'rash, qayta ishlashni cheklash. Huquqlaringizni amalga oshirish uchun: greencamuz@gmail.com</p></div>
+        <div class="legal-section"><h2>10. Cookie fayllar</h2><p>Ushbu veb-sayt asosiy funksionallik uchun zarur cookie fayllardan foydalanishi mumkin. Kuzatish yoki reklama cookie fayllari ishlatilmaydi.</p></div>
+        <div class="legal-section"><h2>11. Siyosatdagi o'zgarishlar</h2><p>Biz ushbu Maxfiylik siyosatini vaqti-vaqti bilan yangilashimiz mumkin. O'zgarishlar ushbu sahifada yangilangan sana bilan e'lon qilinadi.</p></div>
+        <div class="legal-section"><h2>12. Bog'lanish</h2><p>greencamuz@gmail.com<br>+998 90 927 14 00</p></div>
+{% else %}
+        <div class="legal-section"><h2>1. Introduction</h2><p>This Privacy Policy explains how the GreenCamUz project consortium ("we", "us", "our") collects, uses, and protects personal data through the website greencam.uz. The GreenCamUz project (No. 101234907) is funded by the European Union under the Erasmus+ Capacity Building in Higher Education (CBHE) Strand 1 programme, coordinated by Kokand University (Uzbekistan).</p></div>
+        <div class="legal-section"><h2>2. Data Controller</h2><p>Kokand University (KU)<br>Turkiston ko'chasi, 28A-uy, Kokand 150700, Uzbekistan<br>Email: greencamuz@gmail.com<br>Phone: +998 90 927 14 00</p></div>
+        <div class="legal-section"><h2>3. What Data We Collect</h2><p>We may collect the following personal data through this website: name, email address, phone number, and institutional affiliation — only when voluntarily submitted through the contact form. We also collect anonymous usage data through standard web server logs (IP address, browser type, pages visited, time of visit).</p></div>
+        <div class="legal-section"><h2>4. Purpose of Data Processing</h2><p>Personal data is processed for the following purposes: responding to inquiries submitted through the contact form, communicating project-related information to stakeholders and partners, and fulfilling reporting obligations to the European Education and Culture Executive Agency (EACEA).</p></div>
+        <div class="legal-section"><h2>5. Legal Basis</h2><p>Personal data is processed in compliance with Regulation (EU) 2016/679 (General Data Protection Regulation — GDPR) and applicable national legislation of the Republic of Uzbekistan. Data processing is based on the consent of the data subject (Article 6(1)(a) GDPR) and the legitimate interests of the project consortium (Article 6(1)(f) GDPR).</p></div>
+        <div class="legal-section"><h2>6. Data Sharing</h2><p>Personal data may be shared with: project consortium partner institutions (9 beneficiaries listed on the About page), the European Education and Culture Executive Agency (EACEA) for project monitoring and reporting purposes, and auditors or evaluators appointed by the European Commission. We do not sell, trade, or transfer personal data to any third parties for commercial purposes.</p></div>
+        <div class="legal-section"><h2>7. Data Retention</h2><p>Personal data will be retained for the duration of the project (36 months) and for a period of 5 years after the final payment, in accordance with Erasmus+ grant agreement requirements (Article 25 of Grant Agreement GAP-101234907).</p></div>
+        <div class="legal-section"><h2>8. Data Security</h2><p>We implement appropriate technical and organizational measures to ensure the security of personal data, as required by Article 15.2 of the Grant Agreement.</p></div>
+        <div class="legal-section"><h2>9. Your Rights</h2><p>Under the GDPR, you have the right to: access your personal data, rectify inaccurate data, request erasure of your data, restrict processing, object to processing, and data portability. To exercise these rights, contact us at greencamuz@gmail.com.</p></div>
+        <div class="legal-section"><h2>10. Cookies</h2><p>This website may use essential cookies for basic functionality. No tracking or advertising cookies are used.</p></div>
+        <div class="legal-section"><h2>11. Changes to This Policy</h2><p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date.</p></div>
+        <div class="legal-section"><h2>12. Contact</h2><p>greencamuz@gmail.com<br>+998 90 927 14 00</p></div>
+{% endif %}
     </div>
 </section>
 {% endblock %}

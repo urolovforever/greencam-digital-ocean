@@ -6,17 +6,17 @@ from .models import Event, EventMedia
 class EventMediaInline(admin.TabularInline):
     model = EventMedia
     extra = 1
-    fields = ('media_type', 'file', 'caption', 'order')
+    fields = ('media_type', 'file', 'order')
 
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'date', 'location', 'is_active', 'is_featured', 'media_count', 'created_at')
-    list_filter = ('is_active', 'date', 'is_featured', 'created_at')
+    list_display = ('name', 'date', 'location', 'is_active', 'media_count', 'created_at')
+    list_filter = ('is_active', 'date', 'created_at')
     search_fields = ('name', 'location', 'description')
     date_hierarchy = 'date'
     ordering = ('-date',)
-    list_editable = ('is_active', 'is_featured')
+    list_editable = ('is_active',)
     list_per_page = 20
     save_on_top = True
     inlines = [EventMediaInline]
@@ -27,13 +27,14 @@ class EventAdmin(admin.ModelAdmin):
     media_count.short_description = 'Media'
 
     fieldsets = (
-        ('Event Information', {
-            'fields': ('name', 'date', 'location')
+        ('Meeting Information (English)', {
+            'fields': ('name', 'date', 'location', 'description')
         }),
-        ('Description', {
-            'fields': ('description',)
+        ('Meeting Information (Uzbek)', {
+            'fields': ('name_uz', 'location_uz', 'description_uz'),
+            'classes': ('collapse',),
         }),
         ('Settings', {
-            'fields': ('is_active', 'is_featured')
+            'fields': ('is_active',)
         }),
     )

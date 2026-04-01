@@ -1,0 +1,245 @@
+# GreenCamUz Uzbek translations
+# Copyright (C) 2026 Green Campus Initiative
+msgid ""
+msgstr ""
+"Project-Id-Version: GreenCamUz 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-31 00:00+0500\n"
+"PO-Revision-Date: 2026-03-31 00:00+0500\n"
+"Last-Translator: GreenCamUz Team\n"
+"Language-Team: Uzbek\n"
+"Language: uz\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Project"
+msgstr "Loyiha"
+
+msgid "News"
+msgstr "Yangiliklar"
+
+msgid "Activities"
+msgstr "Faoliyatlar"
+
+msgid "Meetings"
+msgstr "Uchrashuvlar"
+
+msgid "Partners"
+msgstr "Hamkorlar"
+
+msgid "Results"
+msgstr "Natijalar"
+
+msgid "Contact"
+msgstr "Bog'lanish"
+
+msgid "Gallery"
+msgstr "Galereya"
+
+msgid "Navigation"
+msgstr "Navigatsiya"
+
+msgid "Resources"
+msgstr "Resurslar"
+
+msgid "All rights reserved."
+msgstr "Barcha huquqlar himoyalangan."
+
+msgid "Privacy Policy"
+msgstr "Maxfiylik siyosati"
+
+msgid "Terms of Use"
+msgstr "Foydalanish shartlari"
+
+msgid "Project number"
+msgstr "Loyiha raqami"
+
+msgid "Tashkent, Uzbekistan"
+msgstr "Toshkent, O'zbekiston"
+
+msgid "Green Campus — for a"
+msgstr "Yashil kampus —"
+
+msgid "sustainable future"
+msgstr "barqaror kelajak uchun"
+
+msgid "The GreenCamUz project is implemented by 9 partner universities to integrate sustainability principles into education at 6 universities in Uzbekistan."
+msgstr "GreenCamUz loyihasi O'zbekistondagi 6 ta universitetda barqarorlik tamoyillarini ta'lim jarayoniga integratsiya qilish uchun 9 ta hamkor universitet tomonidan amalga oshirilmoqda."
+
+msgid "About Project"
+msgstr "Loyiha haqida"
+
+msgid "Latest News"
+msgstr "So'nggi yangiliklar"
+
+msgid "Read more"
+msgstr "Batafsil"
+
+msgid "View all news"
+msgstr "Barcha yangiliklar"
+
+msgid "Project Activities"
+msgstr "Loyiha faoliyatlari"
+
+msgid "View all activities"
+msgstr "Barcha faoliyatlar"
+
+msgid "Consortium Meetings"
+msgstr "Konsorsium yig'ilishlari"
+
+msgid "All meetings"
+msgstr "Barcha uchrashuvlar"
+
+msgid "Details"
+msgstr "Batafsil"
+
+msgid "Project Partners"
+msgstr "Loyiha hamkorlari"
+
+msgid "Photos"
+msgstr "Fotolavhalar"
+
+msgid "View all photos"
+msgstr "Barcha fotolavhalar"
+
+msgid "No meetings scheduled at the moment."
+msgstr "Hozircha rejalashtirilgan uchrashuvlar yo'q."
+
+msgid "No news available at the moment."
+msgstr "Hozircha yangiliklar mavjud emas."
+
+msgid "All news"
+msgstr "Barcha yangiliklar"
+
+msgid "Share"
+msgstr "Ulashish"
+
+msgid "Get in Touch"
+msgstr "Biz bilan bog'laning"
+
+msgid "Have questions about our project or want to get involved? We'd love to hear from you!"
+msgstr "Loyihamiz haqida savollaringiz bormi yoki ishtirok etmoqchimisiz? Sizdan xabar olishdan mamnun bo'lamiz!"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Address"
+msgstr "Manzil"
+
+msgid "Send Message"
+msgstr "Xabar yuborish"
+
+msgid "Page not found"
+msgstr "Sahifa topilmadi"
+
+msgid "The page you're looking for doesn't exist or has been moved."
+msgstr "Siz qidirayotgan sahifa mavjud emas yoki ko'chirilgan."
+
+msgid "Home"
+msgstr "Bosh sahifa"
+
+msgid "Go Back"
+msgstr "Orqaga"
+
+msgid "Quick Links"
+msgstr "Tezkor havolalar"
+
+msgid "All"
+msgstr "Barchasi"
+
+msgid "Events"
+msgstr "Uchrashuvlar"
+
+msgid "No media found"
+msgstr "Media topilmadi"
+
+msgid "No images or videos have been added yet."
+msgstr "Hali rasm yoki video qo'shilmagan."
+
+msgid "Inspire"
+msgstr "Ilhomlantiruvchi lahzalar"
+
+msgid "Explore the journey of Green Campus Initiative through powerful visuals."
+msgstr "Green Campus Initiative sayohatini kuchli vizuallar orqali kashf eting."
+
+msgid "Funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Education and Culture Executive Agency (EACEA). Neither the European Union nor the granting authority can be held responsible for them."
+msgstr "Yevropa Ittifoqi tomonidan moliyalashtirilgan. Bildirilgan fikr va mulohazalar faqat muallif(lar)ning shaxsiy pozitsiyasini aks ettiradi va Yevropa Ittifoqi yoki Yevropa Ta'lim va Madaniyat Ijro Agentligi (EACEA) ning rasmiy nuqtai nazarini bildirmaydi. Yevropa Ittifoqi ham, grant beruvchi organ ham ular uchun javobgar bo'lmaydi."
+
+msgid "Lead"
+msgstr "Rahbar"
+
+msgid "All activities"
+msgstr "Barcha faoliyatlar"
+
+msgid "Work Package"
+msgstr "Ish paketi"
+
+msgid "Description"
+msgstr "Tavsif"
+
+msgid "Tasks"
+msgstr "Vazifalar"
+
+msgid "Expected Deliverable/Results/Outcomes"
+msgstr "Kutilayotgan natija/mahsulot"
+
+msgid "Lead Organisation"
+msgstr "Rahbar tashkilot"
+
+msgid "Duration"
+msgstr "Davomiyligi"
+
+msgid "Participating Organisation"
+msgstr "Ishtirokchi tashkilot"
+
+msgid "Effort"
+msgstr "Mehnat sarfi"
+
+msgid "Go back"
+msgstr "Orqaga"
+
+msgid "Quick links:"
+msgstr "Tezkor havolalar:"
+
+msgid "Programs"
+msgstr "Faoliyatlar"
+
+msgid "The page you are looking for does not exist or has been moved. Let us get you back on the right track."
+msgstr "Siz qidirayotgan sahifa mavjud emas yoki ko'chirilgan. Keling, sizni to'g'ri yo'lga qaytaraylik."
+
+msgid "Moments that inspire"
+msgstr "Ilhomlantiruvchi lahzalar"
+
+msgid "Your Name"
+msgstr "Ismingiz"
+
+msgid "What is this about?"
+msgstr "Mavzu nima haqida?"
+
+msgid "Your message..."
+msgstr "Xabaringiz..."
+
+msgid "Name"
+msgstr "Ism"
+
+msgid "Subject"
+msgstr "Mavzu"
+
+msgid "Message"
+msgstr "Xabar"
+
+msgid "Materials"
+msgstr "Materiallar"
+
+msgid "Download resources for your green campus initiatives"
+msgstr "Yashil kampus tashabbuslaringiz uchun resurslarni yuklab oling"
+
+msgid "No materials available yet."
+msgstr "Hozircha materiallar mavjud emas."
+
+msgid "View all results"
+msgstr "Barcha natijalar"

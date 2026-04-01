@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Results" %} - GreenCamUz{% endblock %}
+
+{% block content %}
+<section class="about-section" style="padding-top: 140px; padding-bottom: 80px;">
+    <div class="section-content" style="text-align: center;">
+        <p>{% trans "Results" %}</p>
+        <a href="{% url 'results:list' %}" class="primary-btn" style="display: inline-flex; margin-top: 20px;">
+            <span>{% trans "View all results" %}</span>
+        </a>
+    </div>
+</section>
+{% endblock %}

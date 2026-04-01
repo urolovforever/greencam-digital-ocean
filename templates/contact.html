@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Contact Us - Green Campus Initiative{% endblock %}
+{% block title %}Contact - GreenCamUz{% endblock %}
 
 {% block content %}
 <!-- Contact Section -->
@@ -9,9 +10,9 @@
     <div class="section-content">
         <div class="about-grid">
             <div class="about-text">
-                <span class="section-tag">Get in Touch</span>
-                <h2 class="section-title">Contact Green Campus Initiative</h2>
-                <p class="about-paragraph">Have questions about our programs or want to get involved? We'd love to hear from you! Reach out to us and join the movement for a sustainable future.</p>
+                <span class="section-tag">{% trans "Contact" %}</span>
+                <h2 class="section-title">{% trans "Get in Touch" %}</h2>
+                <p class="about-paragraph">{% trans "Have questions about our project or want to get involved? We'd love to hear from you!" %}</p>
 
                 <div class="about-values" style="margin-top: 40px;">
                     <div class="value-item">
@@ -21,7 +22,7 @@
                             </svg>
                         </div>
                         <div>
-                            <h4 class="value-title">Phone</h4>
+                            <h4 class="value-title">{% trans "Phone" %}</h4>
                             <p class="value-desc">+998 90 927 14 00</p>
                         </div>
                     </div>
@@ -33,7 +34,7 @@
                             </svg>
                         </div>
                         <div>
-                            <h4 class="value-title">Email</h4>
+                            <h4 class="value-title">{% trans "Email" %}</h4>
                             <p class="value-desc">greencamuz@gmail.com</p>
                         </div>
                     </div>
@@ -45,8 +46,8 @@
                             </svg>
                         </div>
                         <div>
-                            <h4 class="value-title">Address</h4>
-                            <p class="value-desc">Tashkent, Uzbekistan</p>
+                            <h4 class="value-title">{% trans "Address" %}</h4>
+                            <p class="value-desc">{% trans "Tashkent, Uzbekistan" %}</p>
                         </div>
                     </div>
                 </div>
@@ -69,7 +70,7 @@
                         {{ form.subject }}
                         {{ form.message }}
                         <button type="submit" class="primary-btn" style="width: 100%; margin-top: 10px;">
-                            <span>Send Message</span>
+                            <span>{% trans "Send Message" %}</span>
                             <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M5 12h14"/>
                                 <path d="m12 5 7 7-7 7"/>

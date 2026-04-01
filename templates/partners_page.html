@@ -1,0 +1,384 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Partners" %} - GreenCamUz{% endblock %}
+
+{% block extra_css %}
+<style>
+.partners-page {
+    padding-top: 140px;
+    padding-bottom: 80px;
+}
+
+.partners-page .section-content {
+    max-width: 900px;
+}
+
+.partners-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 48px;
+}
+
+.partners-page-header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: #1a1a2e;
+    border-left: 4px solid #2e5b15;
+    padding-left: 20px;
+}
+
+.partners-breadcrumb {
+    font-size: 14px;
+    color: rgba(26,26,46,0.5);
+}
+
+.partners-breadcrumb a {
+    color: rgba(26,26,46,0.5);
+    text-decoration: none;
+}
+
+.partners-breadcrumb a:hover {
+    color: #2e5b15;
+}
+
+.partner-accordion {
+    margin-bottom: 12px;
+}
+
+.partner-accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    background: rgba(46,91,21,0.04);
+    border: 1px solid rgba(46,91,21,0.08);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.partner-accordion-header:hover {
+    background: rgba(46,91,21,0.08);
+    border-color: rgba(46,91,21,0.15);
+}
+
+.partner-accordion.active .partner-accordion-header {
+    border-color: #2e5b15;
+    border-radius: 16px 16px 0 0;
+    background: rgba(46,91,21,0.06);
+}
+
+.partner-accordion-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a2e;
+}
+
+.partner-accordion-arrow {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    color: rgba(26,26,46,0.4);
+}
+
+.partner-accordion.active .partner-accordion-arrow {
+    transform: rotate(180deg);
+    color: #2e5b15;
+}
+
+.partner-accordion-body {
+    display: none;
+    padding: 24px;
+    border: 1px solid rgba(46,91,21,0.08);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    background: #fff;
+}
+
+.partner-accordion.active .partner-accordion-body {
+    display: block;
+}
+
+.partner-detail-row {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(46,91,21,0.06);
+}
+
+.partner-detail-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.partner-detail-row:first-child {
+    padding-top: 0;
+}
+
+.partner-detail-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #2e5b15;
+    margin-bottom: 4px;
+}
+
+.partner-detail-value {
+    font-size: 15px;
+    color: rgba(26,26,46,0.75);
+    line-height: 1.7;
+}
+
+.partner-section-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(46,91,21,0.1);
+}
+
+.partner-section-label:first-of-type {
+    margin-top: 0;
+}
+
+@media (max-width: 768px) {
+    .partners-page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .partners-page-header h1 {
+        font-size: 32px;
+    }
+
+    .partner-accordion-header {
+        padding: 16px 18px;
+    }
+
+    .partner-accordion-title {
+        font-size: 14px;
+    }
+
+    .partner-accordion-body {
+        padding: 18px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+{% get_current_language as LANG %}
+<section class="about-section partners-page">
+    <div class="section-content">
+
+        <div class="partners-page-header">
+            <h1>{% trans "Partners" %}</h1>
+            <div class="partners-breadcrumb">
+                <a href="{% url 'core:home' %}">{% trans "Home" %}</a> / {% trans "Partners" %}
+            </div>
+        </div>
+
+        <!-- Coordinator -->
+        <div class="partner-section-label">{% if LANG == 'uz' %}Koordinator{% else %}Coordinator{% endif %}</div>
+
+        <div class="partner-accordion">
+            <div class="partner-accordion-header" onclick="toggleAccordion(this)">
+                <span class="partner-accordion-title">{% if LANG == 'uz' %}Qo'qon Universiteti (Qo'qon, O'zbekiston){% else %}Kokand University (Kokand, Uzbekistan){% endif %}</span>
+                <svg class="partner-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="partner-accordion-body">
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Hamkor raqami{% else %}Partner number{% endif %}:</div><div class="partner-detail-value">P1 — KU</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Roli{% else %}Role{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}Koordinator (COO){% else %}Coordinator (COO){% endif %} | PIC: 896864717 | Grant: &euro;41,527.00</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Manzil{% else %}Address{% endif %}:</div><div class="partner-detail-value">Turkiston ko'chasi, 28A-uy, Kokand 150700, {% if LANG == 'uz' %}O'zbekiston{% else %}Uzbekistan{% endif %}</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}WP rahbarligi{% else %}WP leadership{% endif %}:</div><div class="partner-detail-value">WP1</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Tavsif{% else %}Description{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}KU Qo'qon shahridagi birinchi nodavlat universitetidir. Universitet Iqtisodiyot, Moliya, Menejment, Kompyuter muhandisligi, Kibernetika, Turizm, Boshlang'ich va maktabgacha ta'lim, Tilshunoslik bo'yicha turli dasturlarni taklif etadi. KU 2020-yildan beri milliy "Yashil makon" loyihasida faol ishtirok etmoqda.{% else %}KU is the first non-state university in Kokand City, Fergana region. University offers diverse programs in Economics, Finance, Management, Computer Engineering, Cybernetics, Tourism, Primary and Pre-School Education, Linguistics, and recently launched a Faculty of Medicine at the Andijan branch. KU has been actively participating in the national "Green Space" project since 2020.{% endif %}</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Loyihadagi roli{% else %}Roles in the project{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}KU loyiha koordinatori sifatida WP1 ni boshqaradi. KU loyihani boshqarish, moliyaviy jihatlar va manfaatdor tomonlar bilan muvofiqlashtirish ishlarida qatnashadi.{% else %}KU serves as the project coordinator and coordinates WP1. KU is involved in the management of the project, the financial aspects, and the coordination of the project with its stakeholders.{% endif %}</div></div>
+            </div>
+        </div>
+
+        <!-- European Partners -->
+        <div class="partner-section-label">{% if LANG == 'uz' %}Yevropalik hamkorlar{% else %}European Partners{% endif %}</div>
+
+        <div class="partner-accordion">
+            <div class="partner-accordion-header" onclick="toggleAccordion(this)">
+                <span class="partner-accordion-title">{% if LANG == 'uz' %}Politechnika Opolska (Opole, Polsha){% else %}Opole University of Technology (Opole, Poland){% endif %}</span>
+                <svg class="partner-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="partner-accordion-body">
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Hamkor raqami{% else %}Partner number{% endif %}:</div><div class="partner-detail-value">P2 — PO (Politechnika Opolska)</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Roli{% else %}Role{% endif %}:</div><div class="partner-detail-value">Beneficiary (BEN) | PIC: 999879202 | Grant: &euro;54,585.44</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Manzil{% else %}Address{% endif %}:</div><div class="partner-detail-value">Proszkowska 76, Opole 45 758, {% if LANG == 'uz' %}Polsha{% else %}Poland{% endif %}</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}WP rahbarligi{% else %}WP leadership{% endif %}:</div><div class="partner-detail-value">WP4, WP7</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Tavsif{% else %}Description{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}OUTech 1966-yilda tashkil etilgan, Polshaning janubi-g'arbiy qismidagi yetakchi davlat universiteti. Xalqaro hamkorliklar orqali tajriba almashish va global eng yaxshi amaliyotlarni integratsiya qiladi. OUTech 2004-yilda "Yashil ofis" tashabbusini amalga oshirgan.{% else %}OUTech, established in 1966, is a leading public university in southwestern Poland. Through international partnerships, the university enhances expertise, facilitates knowledge sharing, and integrates global best practices. OUTech implemented the "Green Office" initiative in 2004.{% endif %}</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Loyihadagi roli{% else %}Roles in the project{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}OUTech WP4 va WP7 da yordam beradi. 1-trening tadbirini o'zlari tashkil etadi. Pilot loyihalarni amalga oshirishda asosiy rahbar.{% else %}OUTech assists in WP4 and WP7. They organize the 1st training event themselves. They are the main leader in the implementation of pilot projects.{% endif %}</div></div>
+            </div>
+        </div>
+
+        <div class="partner-accordion">
+            <div class="partner-accordion-header" onclick="toggleAccordion(this)">
+                <span class="partner-accordion-title">{% if LANG == 'uz' %}Vilniaus Gedimino Technikos Universitetas (Vilnyus, Litva){% else %}Vilnius Gediminas Technical University (Vilnius, Lithuania){% endif %}</span>
+                <svg class="partner-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="partner-accordion-body">
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Hamkor raqami{% else %}Partner number{% endif %}:</div><div class="partner-detail-value">P3 — VILNIUS TECH</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Roli{% else %}Role{% endif %}:</div><div class="partner-detail-value">Beneficiary (BEN) | PIC: 999647857 | Grant: &euro;51,548.00</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Manzil{% else %}Address{% endif %}:</div><div class="partner-detail-value">Sauletekio al. 11, Vilnius LT-10223, {% if LANG == 'uz' %}Litva{% else %}Lithuania{% endif %}</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}WP rahbarligi{% else %}WP leadership{% endif %}:</div><div class="partner-detail-value">WP2, WP5</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Tavsif{% else %}Description{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}VILNIUS TECH Litvadagi eng yirik tadqiqot universitetlaridan biri bo'lib, texnologiyalar, muhandislik va universitet-biznes hamkorligiga e'tibor qaratadi. Erasmus+ CBHE, Horizon, Digital Europe va boshqa YeI dasturlari doirasida 80 dan ortiq xalqaro loyihalarda faol hamkor.{% else %}VILNIUS TECH is one of the largest research universities in Lithuania, with a focus on technologies, engineering and university-business cooperation. Active partner of over 80 international projects within Erasmus+ CBHE, Horizon, Digital Europe and other EU-funded programs.{% endif %}</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Loyihadagi roli{% else %}Roles in the project{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}VILNIUS TECH GSBE va TIU bilan hamkorlikda WP2 va WP5 ni boshqaradi. Trening kurslarini ishlab chiqish va o'tkazishda yordam beradi.{% else %}VILNIUS TECH manages WP2 and WP5 in collaboration with GSBE and TIU. It assists in developing and delivering training courses.{% endif %}</div></div>
+            </div>
+        </div>
+
+        <div class="partner-accordion">
+            <div class="partner-accordion-header" onclick="toggleAccordion(this)">
+                <span class="partner-accordion-title">{% if LANG == 'uz' %}Karab&uuml;k University (Karab&uuml;k, Turkiya){% else %}Karab&uuml;k University (Karab&uuml;k, T&uuml;rkiye){% endif %}</span>
+                <svg class="partner-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="partner-accordion-body">
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Hamkor raqami{% else %}Partner number{% endif %}:</div><div class="partner-detail-value">P4 — KBU</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Roli{% else %}Role{% endif %}:</div><div class="partner-detail-value">Beneficiary (BEN) | PIC: 948012914 | Grant: &euro;45,157.00</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Manzil{% else %}Address{% endif %}:</div><div class="partner-detail-value">100.yil mah. Karabuk Universitesi, Karab&uuml;k 78050, {% if LANG == 'uz' %}Turkiya{% else %}T&uuml;rkiye{% endif %}</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}WP rahbarligi{% else %}WP leadership{% endif %}:</div><div class="partner-detail-value">WP3, WP6</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Tavsif{% else %}Description{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}KBU 2007-yilda Turkiyaning G'arbiy Qora dengiz mintaqasida tashkil etilgan. KBU da chiqindilarni boshqarish koordinatori va barqarorlik komissiyasi mavjud. Qog'oz sarfini kamaytirish uchun onlayn tizimlardan foydalaniladi.{% else %}KBU was founded in 2007 in the Western Black Sea Region of T&uuml;rkiye. KBU has a Waste Management coordinator and sustainability commission. Online systems are used to reduce paper use.{% endif %}</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Loyihadagi roli{% else %}Roles in the project{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}KBU WP3 va WP6 ni boshqarishda yordam beradi, trening kurslarini tashkil etishda qatnashadi. 2-trening KBU da o'tkaziladi.{% else %}KBU assists in leading WP3 and WP6, and assists in organizing and conducting training courses. 2nd training will be held at KBU.{% endif %}</div></div>
+            </div>
+        </div>
+
+        <!-- Partners from Uzbekistan -->
+        <div class="partner-section-label">{% if LANG == 'uz' %}O'zbekistonlik hamkorlar{% else %}Partners from Uzbekistan{% endif %}</div>
+
+        <div class="partner-accordion">
+            <div class="partner-accordion-header" onclick="toggleAccordion(this)">
+                <span class="partner-accordion-title">Tashkent International University ({% if LANG == 'uz' %}Toshkent, O'zbekiston{% else %}Tashkent, Uzbekistan{% endif %})</span>
+                <svg class="partner-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="partner-accordion-body">
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Hamkor raqami{% else %}Partner number{% endif %}:</div><div class="partner-detail-value">P5 — TIU</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Roli{% else %}Role{% endif %}:</div><div class="partner-detail-value">Beneficiary (BEN) | PIC: 878073101 | Grant: &euro;33,679.00</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Manzil{% else %}Address{% endif %}:</div><div class="partner-detail-value">Kichik halqa yo'li ko'chasi, 7-uy, {% if LANG == 'uz' %}Toshkent{% else %}Tashkent{% endif %} 100114</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}WP rahbarligi{% else %}WP leadership{% endif %}:</div><div class="partner-detail-value">WP5, WP7</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Tavsif{% else %}Description{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}TIU 2023-yil oktabrda Toshkentda tashkil etilgan xususiy oliy ta'lim muassasasi. TIU iqtisodiyot, moliya va huquqshunoslik bo'yicha xalqaro tajribaga ega xilma-xil professor-o'qituvchilar tarkibiga ega.{% else %}TIU is a private higher education institution founded in October 2023, situated in Tashkent. TIU boasts a diverse faculty with international experience in economics, finance, and juridical studies.{% endif %}</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Loyihadagi roli{% else %}Roles in the project{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}TIU VILNIUS TECH va OUTech bilan hamkorlikda WP5 va WP7 ni boshqaradi va barcha WP larda faol qatnashadi.{% else %}TIU leads WP5 and WP7 in collaboration with VILNIUS TECH and OUTech, and actively participates in all WPs.{% endif %}</div></div>
+            </div>
+        </div>
+
+        <div class="partner-accordion">
+            <div class="partner-accordion-header" onclick="toggleAccordion(this)">
+                <span class="partner-accordion-title">{% if LANG == 'uz' %}Markaziy Osiyo Universiteti / Green University (Toshkent, O'zbekiston){% else %}Central Asian University / Green University (Tashkent, Uzbekistan){% endif %}</span>
+                <svg class="partner-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="partner-accordion-body">
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Hamkor raqami{% else %}Partner number{% endif %}:</div><div class="partner-detail-value">P6 — CAGU</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Roli{% else %}Role{% endif %}:</div><div class="partner-detail-value">Beneficiary (BEN) | PIC: 879548374 | Grant: &euro;33,198.00</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}WP rahbarligi{% else %}WP leadership{% endif %}:</div><div class="partner-detail-value">WP6</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Tavsif{% else %}Description{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}CAGU "Hub and Spoke" tamoyili bo'yicha tashkil etilgan davlat oliy ta'lim muassasasi bo'lib, bir nechta saytlar va kampuslarga xizmat ko'rsatadi.{% else %}CAGU is a public higher education institution organized according to the "Hub and Spoke" principle, where there is a centralized support structure that connects and provides services to several sites or campuses.{% endif %}</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Loyihadagi roli{% else %}Roles in the project{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}CAGU KBU bilan hamkorlikda WP6 ni amalga oshiradi va barcha WP larda faol qatnashadi.{% else %}CAGU implements WP6 in collaboration with KBU and actively participates in all WPs.{% endif %}</div></div>
+            </div>
+        </div>
+
+        <div class="partner-accordion">
+            <div class="partner-accordion-header" onclick="toggleAccordion(this)">
+                <span class="partner-accordion-title">Alfraganus University ({% if LANG == 'uz' %}Toshkent, O'zbekiston{% else %}Tashkent, Uzbekistan{% endif %})</span>
+                <svg class="partner-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="partner-accordion-body">
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Hamkor raqami{% else %}Partner number{% endif %}:</div><div class="partner-detail-value">P7 — AFU</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Roli{% else %}Role{% endif %}:</div><div class="partner-detail-value">Beneficiary (BEN) | PIC: 880101080 | Grant: &euro;32,042.00</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}WP rahbarligi{% else %}WP leadership{% endif %}:</div><div class="partner-detail-value">WP4</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Tavsif{% else %}Description{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}AFU 2022-yilda Toshkentda tashkil etilgan. AFU 2023-yildan beri Barqaror Rivojlanish Maqsadlari bo'yicha faoliyat va loyihalarni boshlagan.{% else %}AFU was founded in 2022 in Tashkent. AFU has launched activities and projects on Sustainable Development Goals since 2023.{% endif %}</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Loyihadagi roli{% else %}Roles in the project{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}AFU OUTech bilan hamkorlikda WP4 da loyiha rahbari. AFU barcha WP larda faol qatnashadi.{% else %}AFU is the project leader in WP4 in collaboration with OUTech. AFU actively participates in all WPs.{% endif %}</div></div>
+            </div>
+        </div>
+
+        <div class="partner-accordion">
+            <div class="partner-accordion-header" onclick="toggleAccordion(this)">
+                <span class="partner-accordion-title">{% if LANG == 'uz' %}Andijon davlat texnika instituti (Andijon, O'zbekiston){% else %}Andijan State Technical Institute (Andijan, Uzbekistan){% endif %}</span>
+                <svg class="partner-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="partner-accordion-body">
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Hamkor raqami{% else %}Partner number{% endif %}:</div><div class="partner-detail-value">P8 — ASTI</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Roli{% else %}Role{% endif %}:</div><div class="partner-detail-value">Beneficiary (BEN) | PIC: 923620033 | Grant: &euro;34,748.00</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}WP rahbarligi{% else %}WP leadership{% endif %}:</div><div class="partner-detail-value">WP3</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Tavsif{% else %}Description{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}ASTI 2024-yil 18-noyabrdagi PQ-396-son Prezident Farmoni asosida Andijon viloyatidagi 3 ta mavjud oliy ta'lim muassasasini birlashtirish asosida tashkil etilgan. ASTI Mexatronika va Biotibbiyot markazlarini muvaffaqiyatli tashkil etgan.{% else %}ASTI was established by Presidential Decree No. PQ-396 dated November 18, 2024, based on the merger of 3 existing higher educational institutions in Andijan region. ASTI has successfully established Mechatronics and Biomedical Centers.{% endif %}</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Loyihadagi roli{% else %}Roles in the project{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}ASTI va KBU WP3 ni boshqaradi va barcha WP rahbarlariga ekspert sifatida yordam beradi.{% else %}ASTI and KBU lead WP3 and assist all WP leaders as an expert.{% endif %}</div></div>
+            </div>
+        </div>
+
+        <div class="partner-accordion">
+            <div class="partner-accordion-header" onclick="toggleAccordion(this)">
+                <span class="partner-accordion-title">{% if LANG == 'uz' %}Biznes va Tadbirkorlik Oliy Maktabi (Toshkent, O'zbekiston){% else %}Graduate School of Business and Entrepreneurship (Tashkent, Uzbekistan){% endif %}</span>
+                <svg class="partner-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="partner-accordion-body">
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Hamkor raqami{% else %}Partner number{% endif %}:</div><div class="partner-detail-value">P9 — GSBE</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Roli{% else %}Role{% endif %}:</div><div class="partner-detail-value">Beneficiary (BEN) | PIC: 879013904 | Grant: &euro;33,198.00</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}WP rahbarligi{% else %}WP leadership{% endif %}:</div><div class="partner-detail-value">WP2</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Tavsif{% else %}Description{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}GSBE 2001-yil 18-mayda tashkil etilgan yetakchi davlat muassasasi. Biznes va tadbirkorlik sohasida hukumat strategiyalari va tashabbuslarini qo'llab-quvvatlashga bag'ishlangan.{% else %}GSBE is a premier government institution established on May 18, 2001. Dedicated to supporting government-led strategies and initiatives in business and entrepreneurship.{% endif %}</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Loyihadagi roli{% else %}Roles in the project{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}GSBE va VILNIUS TECH WP2 ni boshqaradi va boshqa WP larda faol qatnashadi.{% else %}GSBE and VILNIUS TECH manage WP2 and actively participate in other WPs.{% endif %}</div></div>
+            </div>
+        </div>
+
+        <!-- Associated Partners -->
+        <div class="partner-section-label">{% if LANG == 'uz' %}Assotsiatsiyalashgan hamkorlar{% else %}Associated Partners{% endif %}</div>
+
+        <div class="partner-accordion">
+            <div class="partner-accordion-header" onclick="toggleAccordion(this)">
+                <span class="partner-accordion-title">{% if LANG == 'uz' %}O'zbekiston Ekologiya, Atrof-muhit muhofazasi va Iqlim o'zgarishi vazirligi (Toshkent){% else %}Ministry of Ecology, Environmental Protection and Climate Change (Tashkent, Uzbekistan){% endif %}</span>
+                <svg class="partner-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="partner-accordion-body">
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Hamkor raqami{% else %}Partner number{% endif %}:</div><div class="partner-detail-value">P10 — Minecology</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Roli{% else %}Role{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}Assotsiatsiyalashgan hamkor{% else %}Associated Partner{% endif %} | PIC: 879471453</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Loyihadagi roli{% else %}Roles in the project{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}Maslahat va qo'llab-quvvatlash{% else %}Advisory and support{% endif %}</div></div>
+            </div>
+        </div>
+
+        <div class="partner-accordion">
+            <div class="partner-accordion-header" onclick="toggleAccordion(this)">
+                <span class="partner-accordion-title">{% if LANG == 'uz' %}O'zbekiston Oliy ta'lim, Fan va Innovatsiyalar vazirligi (Toshkent){% else %}Ministry of Higher Education, Science and Innovation (Tashkent, Uzbekistan){% endif %}</span>
+                <svg class="partner-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="partner-accordion-body">
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Hamkor raqami{% else %}Partner number{% endif %}:</div><div class="partner-detail-value">P11 — MHESIRUZ</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Roli{% else %}Role{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}Assotsiatsiyalashgan hamkor{% else %}Associated Partner{% endif %} | PIC: 933247671</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Loyihadagi roli{% else %}Roles in the project{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}Maslahat va qo'llab-quvvatlash{% else %}Advisory and support{% endif %}</div></div>
+            </div>
+        </div>
+
+        <div class="partner-accordion">
+            <div class="partner-accordion-header" onclick="toggleAccordion(this)">
+                <span class="partner-accordion-title">{% if LANG == 'uz' %}Toshkent Davlat Sharqshunoslik Universiteti (Toshkent){% else %}Tashkent State University of Oriental Studies (Tashkent, Uzbekistan){% endif %}</span>
+                <svg class="partner-accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="partner-accordion-body">
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Hamkor raqami{% else %}Partner number{% endif %}:</div><div class="partner-detail-value">P12 — TSUOS</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Roli{% else %}Role{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}Assotsiatsiyalashgan hamkor{% else %}Associated Partner{% endif %} | PIC: 921969287</div></div>
+                <div class="partner-detail-row"><div class="partner-detail-label">{% if LANG == 'uz' %}Loyihadagi roli{% else %}Roles in the project{% endif %}:</div><div class="partner-detail-value">{% if LANG == 'uz' %}Maslahat va qo'llab-quvvatlash{% else %}Advisory and support{% endif %}</div></div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+function toggleAccordion(header) {
+    var accordion = header.parentElement;
+    var wasActive = accordion.classList.contains('active');
+    document.querySelectorAll('.partner-accordion.active').forEach(function(el) {
+        el.classList.remove('active');
+    });
+    if (!wasActive) {
+        accordion.classList.add('active');
+    }
+}
+</script>
+{% endblock %}
