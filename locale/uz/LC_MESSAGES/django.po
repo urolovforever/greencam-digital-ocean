@@ -246,3 +246,6 @@ msgstr "Hozircha materiallar mavjud emas."
 
 msgid "View all results"
 msgstr "Barcha natijalar"
+
+msgid "Watch Video"
+msgstr "Videoni ko'rish"

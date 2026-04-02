@@ -36,6 +36,21 @@ class AboutImage(models.Model):
         return self.caption or f"About Image #{self.pk}"
 
 
+class HeroBG(models.Model):
+    """Hero background images for homepage slideshow"""
+    image = models.ImageField(upload_to='hero/', verbose_name="Image")
+    is_active = models.BooleanField(default=True, verbose_name="Active")
+    order = models.PositiveIntegerField(default=0, verbose_name="Order")
+
+    class Meta:
+        ordering = ['order']
+        verbose_name = "Hero Background"
+        verbose_name_plural = "Hero Backgrounds"
+
+    def __str__(self):
+        return f"Hero BG #{self.pk}"
+
+
 class Material(models.Model):
     """Downloadable materials"""
     name = models.CharField(max_length=200, verbose_name="Name", default="")

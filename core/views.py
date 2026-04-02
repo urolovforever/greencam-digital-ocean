@@ -4,6 +4,7 @@ from news.models import News
 from events.models import Event
 from partners.models import Partner
 from gallery.models import Gallery
+from .models import HeroBG
 
 
 def home(request):
@@ -12,6 +13,7 @@ def home(request):
     partners = Partner.objects.filter(is_active=True)
     gallery_photos = Gallery.objects.filter(media_type='image').order_by('-created_at')[:6]
     wp_list = [_get_wp_translated(wp) for wp in list(WP_DATA.values())[:3]]
+    hero_bgs = HeroBG.objects.filter(is_active=True)
 
     return render(request, 'home.html', {
         'wp_list': wp_list,
@@ -19,6 +21,7 @@ def home(request):
         'events': featured_events,
         'partners': partners,
         'gallery_photos': gallery_photos,
+        'hero_bgs': hero_bgs,
     })
 
 

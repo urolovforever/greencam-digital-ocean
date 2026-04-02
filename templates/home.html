@@ -6,9 +6,27 @@
 
 {% block content %}
 <section class="hero">
+    <div class="hero-bg-slideshow" id="heroSlideshow">
+        {% if hero_bgs %}
+            {% for bg in hero_bgs %}
+            <div class="hero-bg-slide {% if forloop.first %}active{% endif %}" style="background-image: url('{{ bg.image.url }}');"></div>
+            {% endfor %}
+        {% else %}
+            <div class="hero-bg-slide active" style="background-image: url('{% static 'img/hero_bg.JPG' %}');"></div>
+            <div class="hero-bg-slide" style="background-image: url('{% static 'img/hero_bg2.jpg' %}');"></div>
+        {% endif %}
+        <div class="hero-bg-overlay"></div>
+    </div>
+    <button class="hero-arrow hero-arrow-left" onclick="heroNav(-1)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="hero-arrow hero-arrow-right" onclick="heroNav(1)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <div class="hero-dots" id="heroDots"></div>
     <div class="hero-content">
         <div class="hero-tag">
-            <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+            <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
             <span>Erasmus+ CBHE Strand 1</span>
         </div>
         <h1 class="hero-title">
@@ -21,13 +39,72 @@
                 <span>{% trans "About Project" %}</span>
                 <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
-            <a href="{% url 'programs:list' %}" class="secondary-btn">
-                <div class="play-icon-wrap"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="#2e5b15" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
-                <span>{% trans "Activities" %}</span>
+            <a href="#" class="secondary-btn" onclick="openVideoModal(); return false;">
+                <div class="play-icon-wrap"><svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="#2e5b15" stroke="#2e5b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+                <span>{% trans "Watch Video" %}</span>
             </a>
         </div>
     </div>
 </section>
+
+<!-- Video Modal -->
+<div id="videoModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; justify-content:center; align-items:center;">
+    <div style="position:relative; width:90%; max-width:900px;">
+        <button onclick="closeVideoModal()" style="position:absolute; top:-40px; right:0; background:none; border:none; color:#fff; font-size:32px; cursor:pointer; z-index:10000;">&times;</button>
+        <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px;">
+            <iframe id="videoIframe" style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+<script>
+function openVideoModal() {
+    document.getElementById('videoIframe').src = 'https://www.youtube.com/embed/t0cZERrvzaQ?si=SQqvPJqUezriKQLV&autoplay=1';
+    document.getElementById('videoModal').style.display = 'flex';
+}
+function closeVideoModal() {
+    document.getElementById('videoIframe').src = '';
+    document.getElementById('videoModal').style.display = 'none';
+}
+document.getElementById('videoModal').addEventListener('click', function(e) { if (e.target === this) closeVideoModal(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeVideoModal(); });
+
+// Hero background slideshow with arrows and dots
+var heroSlides = document.querySelectorAll('.hero-bg-slide');
+var heroCurrent = 0;
+var heroTimer;
+var heroDots = document.getElementById('heroDots');
+
+function heroGoTo(index) {
+    heroSlides[heroCurrent].classList.remove('active');
+    heroCurrent = (index + heroSlides.length) % heroSlides.length;
+    heroSlides[heroCurrent].classList.add('active');
+    updateHeroDots();
+    clearInterval(heroTimer);
+    heroTimer = setInterval(function() { heroNav(1); }, 5000);
+}
+
+function heroNav(dir) {
+    heroGoTo(heroCurrent + dir);
+}
+
+function updateHeroDots() {
+    var dots = heroDots.querySelectorAll('.hero-dot');
+    dots.forEach(function(d, i) {
+        d.classList.toggle('active', i === heroCurrent);
+    });
+}
+
+// Build dots
+for (var i = 0; i < heroSlides.length; i++) {
+    var dot = document.createElement('span');
+    dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('data-index', i);
+    dot.addEventListener('click', function() { heroGoTo(parseInt(this.getAttribute('data-index'))); });
+    heroDots.appendChild(dot);
+}
+
+heroTimer = setInterval(function() { heroNav(1); }, 5000);
+</script>
 
 {% if news_list %}
 <section class="news-section" id="news">
