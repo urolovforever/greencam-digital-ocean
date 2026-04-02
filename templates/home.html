@@ -118,16 +118,16 @@
 
 {% if partners %}
 <section class="partners-section">
-    <div class="container">
+    <div class="section-content">
         <div class="partners-header">
             <span class="section-tag">{% trans "Partners" %}</span>
             <h2 class="section-title">{% trans "Project Partners" %}</h2>
         </div>
-        <div class="partners-carousel-wrapper">
-            <div class="partners-carousel">
-                {% for partner in partners %}<div class="partner-item">{% if partner.website_url %}<a href="{{ partner.website_url }}" target="_blank" rel="noopener noreferrer" class="partner-link"><img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo"></a>{% else %}<div class="partner-link"><img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo"></div>{% endif %}</div>{% endfor %}
-                {% for partner in partners %}<div class="partner-item">{% if partner.website_url %}<a href="{{ partner.website_url }}" target="_blank" rel="noopener noreferrer" class="partner-link"><img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo"></a>{% else %}<div class="partner-link"><img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo"></div>{% endif %}</div>{% endfor %}
-            </div>
+    </div>
+    <div class="partners-carousel-wrapper">
+        <div class="partners-carousel">
+            {% for partner in partners %}<div class="partner-item">{% if partner.website_url %}<a href="{{ partner.website_url }}" target="_blank" rel="noopener noreferrer" class="partner-link"><img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo"></a>{% else %}<div class="partner-link"><img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo"></div>{% endif %}</div>{% endfor %}
+            {% for partner in partners %}<div class="partner-item">{% if partner.website_url %}<a href="{{ partner.website_url }}" target="_blank" rel="noopener noreferrer" class="partner-link"><img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo"></a>{% else %}<div class="partner-link"><img src="{{ partner.logo.url }}" alt="{{ partner.name }}" class="partner-logo"></div>{% endif %}</div>{% endfor %}
         </div>
     </div>
 </section>

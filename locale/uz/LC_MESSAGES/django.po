@@ -58,6 +58,9 @@ msgstr "Loyiha raqami"
 msgid "Tashkent, Uzbekistan"
 msgstr "Toshkent, O'zbekiston"
 
+msgid "28A, Turkistan street, Kokand city, Uzbekistan"
+msgstr "Turkiston ko'chasi, 28A-uy, Qo'qon shahri, O'zbekiston"
+
 msgid "Green Campus — for a"
 msgstr "Yashil kampus —"
 

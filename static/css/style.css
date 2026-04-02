@@ -3120,20 +3120,19 @@ textarea.contact-input {
     content: '';
     position: absolute;
     top: 0;
-    width: 150px;
+    width: 100px;
     height: 100%;
     z-index: 2;
+    pointer-events: none;
     pointer-events: none;
 }
 
 .partners-carousel-wrapper::before {
-    left: 0;
-    background: linear-gradient(90deg, rgba(250,255,254,1) 0%, rgba(250,255,254,0) 100%);
+    display: none;
 }
 
 .partners-carousel-wrapper::after {
-    right: 0;
-    background: linear-gradient(270deg, rgba(250,255,254,1) 0%, rgba(250,255,254,0) 100%);
+    display: none;
 }
 
 .partners-carousel {
@@ -3169,27 +3168,34 @@ textarea.contact-input {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 70px;
+    width: 220px;
+    height: 150px;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid rgba(46,91,21,0.08);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    padding: 24px;
+    transition: all 0.3s ease;
+}
+
+.partner-item:hover {
+    box-shadow: 0 8px 30px rgba(46,91,21,0.12);
+    transform: scale(1.05);
 }
 
 .partner-link {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
     height: 100%;
     text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.partner-link:hover {
-    transform: scale(1.05);
 }
 
 .partner-logo {
-    height: 100%;
-    width: auto;
+    max-height: 100%;
+    max-width: 100%;
     object-fit: contain;
-    transition: all 0.3s ease;
 }
 
 @media (max-width: 768px) {
@@ -3206,7 +3212,9 @@ textarea.contact-input {
     }
 
     .partner-item {
-        height: 50px;
+        width: 140px;
+        height: 90px;
+        padding: 14px;
     }
 
     .partners-carousel-wrapper::before,
@@ -3452,7 +3460,9 @@ textarea.contact-input {
     }
 
     .partner-item {
-        height: 60px;
+        width: 160px;
+        height: 100px;
+        padding: 16px;
     }
 }
 
