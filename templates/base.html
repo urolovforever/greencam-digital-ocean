@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Green Campus Initiative{% endblock %}</title>
+    <title>{% block title %}GreenCamUz{% endblock %}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -33,8 +33,8 @@
                         <img src="{% static 'img/logo2.png' %}" alt="Green Campus Logo" class="logo-img">
                         <img src="{% static 'img/logo.png' %}" alt="Green Campus Logo" class="logo-img">
                     </div>
-                    <span class="logo-text desktop-only">Green Campus</span>
-                    <span class="logo-text-mobile">Green Campus</span>
+                    <span class="logo-text desktop-only">GreenCamUz</span>
+                    <span class="logo-text-mobile">GreenCamUz</span>
                 </a>
                 <div class="nav-links" id="navLinks">
                     <a href="{% url 'core:about' %}" class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">{% trans "Project" %}</a>
@@ -97,9 +97,9 @@
                                 <img src="{% static 'img/logo2.png' %}" alt="Green Campus Logo" class="logo-img">
                                 <img src="{% static 'img/logo.png' %}" alt="Green Campus Logo" class="logo-img">
                             </div>
-                            <span class="footer-logo-text">Green Campus</span>
+                            <span class="footer-logo-text">GreenCamUz</span>
                         </div>
-                        <p class="footer-desc">{% trans "Funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Education and Culture Executive Agency (EACEA). Neither the European Union nor the granting authority can be held responsible for them." %}</p>
+                        <p class="footer-desc">{% trans "Funded by the European Union. Views and opinions expressed are those of the author(s) only and do not necessarily reflect those of the European Union or the European Education and Culture Executive Agency (EACEA). Neither the European Union nor EACEA can be held responsible for them." %}</p>
                         <p class="footer-desc" style="margin-top: 8px; font-size: 12px; opacity: 0.7;">Erasmus+ Capacity Building in Higher Education (CBHE) Strand 1<br>Project number: 101234907</p>
                         <div class="footer-socials">
                             <a href="https://www.instagram.com/greencamuz/" class="footer-social-icon" target="_blank" rel="noopener noreferrer"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#84cc16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>

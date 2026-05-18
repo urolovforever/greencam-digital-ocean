@@ -169,8 +169,8 @@ msgstr "Ilhomlantiruvchi lahzalar"
 msgid "Explore the journey of Green Campus Initiative through powerful visuals."
 msgstr "Green Campus Initiative sayohatini kuchli vizuallar orqali kashf eting."
 
-msgid "Funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Education and Culture Executive Agency (EACEA). Neither the European Union nor the granting authority can be held responsible for them."
-msgstr "Yevropa Ittifoqi tomonidan moliyalashtirilgan. Bildirilgan fikr va mulohazalar faqat muallif(lar)ning shaxsiy pozitsiyasini aks ettiradi va Yevropa Ittifoqi yoki Yevropa Ta'lim va Madaniyat Ijro Agentligi (EACEA) ning rasmiy nuqtai nazarini bildirmaydi. Yevropa Ittifoqi ham, grant beruvchi organ ham ular uchun javobgar bo'lmaydi."
+msgid "Funded by the European Union. Views and opinions expressed are those of the author(s) only and do not necessarily reflect those of the European Union or the European Education and Culture Executive Agency (EACEA). Neither the European Union nor EACEA can be held responsible for them."
+msgstr "Yevropa Ittifoqi tomonidan moliyalashtirilgan. Bildirilgan fikr va mulohazalar faqat muallif(lar)ning shaxsiy pozitsiyasini aks ettiradi va Yevropa Ittifoqi yoki Yevropa Ta'lim va Madaniyat Ijro Agentligi (EACEA) ning rasmiy nuqtai nazarini bildirmaydi. Yevropa Ittifoqi ham, EACEA ham ular uchun javobgar bo'lmaydi."
 
 msgid "Lead"
 msgstr "Rahbar"
